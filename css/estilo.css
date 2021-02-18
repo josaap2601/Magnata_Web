@@ -5,16 +5,58 @@
     padding: 0;
 }
 
+
+/*.hamburger e um menu interativo*/
+
 .hamburguer {
-    background-color: red;
+    /*background-color: red;*/
     width: 2rem;
     height: 2rem;
-    position: relative;
+    position: fixed;
+    /*posição na frente da imagem do menu*/
+    z-index: 100;
+    /*posição da imagem direita ou esquerda do menu*/
+    right: 2rem;
+    /*posição p alto e baixo da imagem do menu*/
+    top: 2rem;
+    /*linhas do menu*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /*o curso do mouse no menu*/
+    cursor: pointer;
 }
+
+
+/*as line do menu */
+
+.line {
+    /*tamanho da line do menu*/
+    width: 100%;
+    height: .1rem;
+    /*cor das linhas do menu*/
+    background-color: #fff;
+    /*sombra das linhas do menu*/
+    box-shadow: 0.1rem 0.1rem 1px#000;
+}
+
+
+/*as header*/
 
 header {
     width: 100%;
     height: 100vh;
     overflow: hidden;
     position: relative;
+}
+
+
+/*os banner*/
+
+.banner h1 {
+    color: #ffffff;
+    font-size: 3.5rem;
+    font-family: "Baloo Da 2", serif;
+    font-weight: 200;
+    text-shadow: .3rem .4rem 2px rgb(0, 0, 0, .4);
 }
