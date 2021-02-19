@@ -1,6 +1,6 @@
 # Magmata_Web
 Magnata Desenvolverdor Web
 
-##tarefas
+## Tarefas
 
-O controle das tarefas desse progeto será realizado no GitHub
+O controle das tarefas desse projeto será realizado no GitHubgi

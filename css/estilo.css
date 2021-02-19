@@ -45,18 +45,87 @@
 
 header {
     width: 100%;
+    /*altura da imagem*/
     height: 100vh;
+    /*tirar a barra de rolagem*/
     overflow: hidden;
+    /*posição do banner*/
     position: relative;
+}
+
+
+/*fomatação da imagem atura e largura*/
+
+.img-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /*suavizar a cor da imagem da paste de traz do site*/
+    background-color: rgb(0, 0, 0, 0.8);
+}
+
+
+/*fomatação da imagem atura e largura*/
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    /*redimenciona a imagem*/
+    object-fit: cover;
+    /*opacidade da imagem da paste de traz do site*/
+    opacity: 0.5;
 }
 
 
 /*os banner*/
 
+.banner {
+    /*posição do banner*/
+    position: absolute;
+    /*distancia da altura top*/
+    top: 30%;
+    /*distacia do lado esquerdo left*/
+    left: 15%;
+    /*posição do botão*/
+}
+
 .banner h1 {
+    /*cor h1*/
     color: #ffffff;
+    /*tamanho da fonte h1*/
     font-size: 3.5rem;
+    /*fonte baixada*/
     font-family: "Baloo Da 2", serif;
+    /*diminuir o peso da fonte*/
     font-weight: 200;
+    /*sobra do texto da fonte*/
     text-shadow: .3rem .4rem 2px rgb(0, 0, 0, .4);
+    /*espaçamento entre as lihas do texto banner h1*/
+    line-height: 3.5rem;
+    /*espaçamento entre h1 e p*/
+    margin-bottom: 2rem;
+}
+
+
+/*cor, fonte, tamanho e sombreamento do banner p*/
+
+.banner p {
+    font-family: "Josefi Slab", serif;
+    color: #fff;
+    font-size: 2rem;
+    text-shadow: .2rem .2rem rgb(0, 0, 0, .4);
+    /*espaçamento entre p botão*/
+    margin-bottom: 2rem;
+}
+
+
+/*estilo do botão*/
+
+
+/*fonte, cor*/
+
+.banner button {
+    font-family: "Muli", serif;
+    color: #000;
+    background-color: aqua;
 }
