@@ -74,6 +74,21 @@ header {
     object-fit: cover;
     /*opacidade da imagem da paste de traz do site*/
     opacity: 0.5;
+    /*ativando animação do @keyframes da imagem de fundo*zoom*duração*/
+    animation: zoom 25s;
+}
+
+
+/*animação da imagem de fundo*/
+
+@keyframes zoom {
+    /*animação de 0% a 100%*/
+    0% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 
@@ -104,6 +119,11 @@ header {
     line-height: 3.5rem;
     /*espaçamento entre h1 e p*/
     margin-bottom: 2rem;
+    /*faz sumir animação do @keyframe no inicio */
+    opacity: 0;
+    /*ativando animação do @keyframe do texto sobre a imagem de fundo*
+    moveBanner*duração*/
+    animation: moveBanner 1s 0.5s forwards;
 }
 
 
@@ -116,16 +136,66 @@ header {
     text-shadow: .2rem .2rem rgb(0, 0, 0, .4);
     /*espaçamento entre p botão*/
     margin-bottom: 2rem;
+    /*faz sumir animação do @keyframe no inicio */
+    opacity: 0;
+    /*ativando animação do @keyframe do texto sobre a imagem de fundo*
+moveBanner*duração*/
+    animation: moveBanner 1s 0.7s forwards;
+    ;
 }
 
 
-/*estilo do botão*/
-
-
-/*fonte, cor*/
+/*estilo do botão
+/*fonte, cor e tamanho
+backgroud que e um gradiente e inportado do site unigradients*/
 
 .banner button {
     font-family: "Muli", serif;
-    color: #000;
-    background-color: aqua;
+    color: #fff;
+    font-size: 1.2rem;
+    text-transform: unset;
+    /*espaçamento entre as letras do botão*/
+    letter-spacing: .1rem;
+    /*linea gradiente*/
+    background: #7F00FF;
+    background: -webkit-linear-gradient(to right, #E100FF, #7F00FF);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #E100FF, #7F00FF);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /*altura e largura do botão*/
+    padding: 1rem 3rem;
+    /*tirar a borda do botão*/
+    border: none;
+    /*redondamendo da borda do botão*/
+    border-radius: 5px;
+    /*cursor do mouse no botão*/
+    cursor: pointer;
+    /*faz sumir animação do @keyframe no inicio */
+    opacity: 0;
+    /*ativando animação do @keyframe do texto sobre a imagem de fundo*
+moveBanner*duração*/
+    animation: moveBanner 1s 0.9s forwards;
+}
+
+
+/*animação passar o mouser sobre o botão
+opacidade, cor da fonte*
+            
+.banner button:hover {
+    opacity: 0.8;
+    color: #000
+}*/
+
+
+/*animação do texto sobre a imagem de fundo*/
+
+@keyframes moveBanner {
+    /*descer subir transleteY* rotação rotate*/
+    0% {
+        transform: translateY(10rem) rotateY(-30deg);
+    }
+    100% {
+        transform: translateY(0) rotateY(0);
+        opacity: 1;
+    }
 }
