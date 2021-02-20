@@ -3,11 +3,11 @@ Magnata Desenvolverdor Web
 
 ## Tarefas
 
-O controle das tarefas desse projeto será realizado no GitHubgi
+O controle das tarefas desse projeto será realizado no GitHub
 
 ## Ícones
 
 :package: nova funcionalidade
 :up: atualização
-:beatle: correção de bug
+:beatle: correção de bag
 :checkered_flag: release
