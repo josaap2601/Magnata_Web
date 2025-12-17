@@ -4,7 +4,7 @@ Magnata Desenvolverdor Web
 
 ## Tarefas
 
-O controle das tarefas desse projeto será realizado no GitHub
+O controle das tarefas desse projeto será realizado no GitHub por Magnata Production
 
 ## Ícones
 
