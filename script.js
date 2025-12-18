@@ -1,42 +1,66 @@
-// Menu Toggle
+// Controle do Menu Hamburguer
 const hamburguer = document.querySelector(".hamburguer");
-const container = document.querySelector("body");
+const body = document.querySelector("body");
+const menuLinks = document.querySelectorAll(".menu-link");
 
 hamburguer.addEventListener("click", () => {
-    container.classList.toggle("show-menu");
+    body.classList.toggle("show-menu");
 });
 
-// Typing Effect
+// Fecha o menu ao clicar em qualquer link
+menuLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        body.classList.remove("show-menu");
+    });
+});
+
+// Efeito Máquina de Escrever
 const text = "Magnata Production.";
 const typingElement = document.getElementById("typing-text");
-let i = 0;
+let charIndex = 0;
 
-function type() {
-    if (i < text.length) {
-        typingElement.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(type, 150);
+function typeEffect() {
+    if (charIndex < text.length) {
+        typingElement.innerHTML += text.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeEffect, 120);
     }
 }
-window.onload = type;
 
-// Modal Logic
+// Inicia a digitação após carregar
+window.addEventListener("DOMContentLoaded", typeEffect);
+
+// Lógica do Modal de Projetos
 const modal = document.getElementById("projectModal");
 const modalImg = document.getElementById("modal-img");
 const modalTitle = document.getElementById("modal-title");
 const modalDesc = document.getElementById("modal-desc");
+const closeModal = document.querySelector(".close-modal");
 
 function openModal(img, title, desc) {
     modal.style.display = "block";
     modalImg.src = img;
-    modalTitle.innerHTML = title;
-    modalDesc.innerHTML = desc;
+    modalTitle.innerText = title;
+    modalDesc.innerText = desc;
+    body.style.overflow = "hidden"; // Trava o scroll do fundo
 }
 
-document.querySelector(".close-modal").onclick = () => modal.style.display = "none";
-window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
+closeModal.onclick = () => {
+    modal.style.display = "none";
+    body.style.overflow = "auto";
+};
 
-// Smooth Scroll
+window.onclick = (event) => {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        body.style.overflow = "auto";
+    }
+};
+
+// Função de Scroll Suave para botões
 function scrollToId(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById(id);
+    if(element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+    }
 }
