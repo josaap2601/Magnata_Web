@@ -2,38 +2,44 @@
 const hamburguer = document.querySelector(".hamburguer");
 const container = document.querySelector(".container");
 const sidebar = document.querySelector(".sidebar");
+const menuLinks = document.querySelectorAll(".menu-link");
 
 /**
- * 1. Alternar Menu (Click)
- * Adiciona ou remove a classe 'show-menu' ao clicar no ícone.
+ * Alternar Menu via Click
  */
 hamburguer.addEventListener("click", () => {
     container.classList.toggle("show-menu");
 });
 
 /**
- * 2. Abrir ao passar o mouse (Hover)
- * Abre o menu lateral assim que o mouse entra na área do botão.
+ * Fechar ao clicar em um link
  */
-hamburguer.addEventListener("mouseenter", () => {
-    container.classList.add("show-menu");
-});
-
-/**
- * 3. Fechar ao sair com o mouse
- * Quando o mouse sai da sidebar, ela fecha sozinha para não atrapalhar a visão.
- */
-sidebar.addEventListener("mouseleave", () => {
-    container.classList.remove("show-menu");
-});
-
-/**
- * 4. Fechar ao clicar em um link
- * Como o site usa links internos (#), precisamos fechar o menu 
- * manualmente após o clique para que o usuário veja o conteúdo.
- */
-document.querySelectorAll(".menu-link").forEach(link => {
+menuLinks.forEach(link => {
     link.addEventListener("click", () => {
         container.classList.remove("show-menu");
+    });
+});
+
+/**
+ * Fechar ao clicar fora da sidebar (opcional, melhora UX)
+ */
+window.addEventListener("click", (e) => {
+    if (container.classList.contains("show-menu") && 
+        !sidebar.contains(e.target) && 
+        !hamburguer.contains(e.target)) {
+        container.classList.remove("show-menu");
+    }
+});
+
+// Efeito de scroll suave para links internos
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
 });
