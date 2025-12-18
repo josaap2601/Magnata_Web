@@ -3,77 +3,78 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
     <link rel="stylesheet" href="css/estilo.css"/>
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png"/>
-    <title>Magnata Production | Portfolio</title>
+    <title>Magnata Production | Premium Portfolio</title>
 </head>
 <body>
+
+    <div class="ads-bar">
+        <div class="ads-track">
+            <span>🔥 PROMOÇÃO: Identidade Visual com 20% OFF</span>
+            <span>🚀 Magnata Production: Elevando sua marca ao próximo nível</span>
+            <span>📸 Edição de fotos profissional - Solicite orçamento</span>
+            <span>🔥 PROMOÇÃO: Identidade Visual com 20% OFF</span>
+        </div>
+    </div>
 
     <div class="container">
         <div class="hamburguer">
             <div class="line" id="line1"></div>
             <div class="line" id="line2"></div>
             <div class="line" id="line3"></div>
-            <span>Menu</span>
         </div> 
 
         <header id="home">
             <div class="img-wrapper">
-                <img src="img/bg.jpg" alt="Background Principal">
+                <img src="img/bg.jpg" alt="Background">
             </div>
             <div class="banner">
                 <h1 id="typing-text"></h1>
-                <button onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Fale Comigo</button>
+                <p class="subtitle">Design de Elite & Produção Audiovisual</p>
+                <div class="banner-buttons">
+                    <button class="btn-primary" onclick="scrollToId('projetos')">Ver Portfólio</button>
+                    <button class="btn-outline" onclick="scrollToId('contato')">Contato</button>
+                </div>
             </div> 
         </header>
   
         <aside class="sidebar">
             <nav>
                 <ul class="menu">
-                    <li class="menu-item"><a href="#home" class="menu-link">Home</a></li>
-                    <li class="menu-item"><a href="#projetos" class="menu-link">Projetos</a></li>
-                    <li class="menu-item"><a href="#contato" class="menu-link">Contato</a></li>
+                    <li><a href="#home" class="menu-link">Início</a></li>
+                    <li><a href="#projetos" class="menu-link">Trabalhos</a></li>
+                    <li><a href="#contato" class="menu-link">Orçamentos</a></li>
                 </ul>
             </nav>
             <div class="social-media">
-                <a href="https://pt-br.facebook.com/josaap2601" target="_blank"><i class="fab fa-facebook-f"></i></a>             
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>             
                 <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
             </div>
         </aside>
 
         <main id="projetos" class="projects-section">
-            <h2 class="section-title">Meus Projetos</h2>
+            <h2 class="section-title">Trabalhos em Destaque</h2>
             <div class="cards-container">
                 
-                <div class="card">
-                    <img src="img/conhecimentos.png" alt="Front-End Design">
-                    <div class="card-content">
-                        <h3>Front-End Design</h3>
-                        <p>Interfaces modernas com foco em usabilidade e performance.</p>
-                        <a href="#" class="card-btn">Ver Detalhes</a>
+                <div class="card" onclick="openModal('img/conhecimentos.png', 'Front-End Design', 'Desenvolvimento de interfaces modernas e responsivas para o seu negócio.')">
+                    <img src="img/conhecimentos.png" alt="Projeto 1">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <h3>Front-End Design</h3>
+                            <span>Toque para ver</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
-                    <img src="img/social-media.jpg" alt="Social Media">
-                    <div class="card-content">
-                        <h3>Social Media</h3>
-                        <p>Gestão de marcas e criação de conteúdo visual estratégico.</p>
-                        <a href="#" class="card-btn">Ver Detalhes</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="img/web-dev.jpg" alt="Web Development">
-                    <div class="card-content">
-                        <h3>Web Development</h3>
-                        <p>Sites responsivos que funcionam em qualquer tela.</p>
-                        <a href="#" class="card-btn">Ver Detalhes</a>
+                <div class="card" onclick="openModal('img/social-media.jpg', 'Social Media', 'Gestão estratégica de redes sociais e criação de conteúdo viral.')">
+                    <img src="img/social-media.jpg" alt="Projeto 2">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <h3>Social Media</h3>
+                            <span>Toque para ver</span>
+                        </div>
                     </div>
                 </div>
 
@@ -82,31 +83,33 @@
 
         <section id="contato" class="contact-section">
             <div class="contact-wrapper">
-                <h2 class="section-title">Contato</h2>
+                <div class="contact-info">
+                    <h2>Vamos criar algo incrível?</h2>
+                    <p>Entre em contato para orçamentos ou parcerias.</p>
+                </div>
                 <form class="contact-form">
-                    <div class="input-group">
-                        <input type="text" placeholder="Seu Nome" required>
-                    </div>
-                    <div class="input-group">
-                        <input type="email" placeholder="Seu E-mail" required>
-                    </div>
-                    <div class="input-group">
-                        <textarea placeholder="Sua Mensagem" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="card-btn-submit">Enviar Mensagem</button>
+                    <input type="text" placeholder="Nome completo" required>
+                    <input type="email" placeholder="E-mail profissional" required>
+                    <textarea placeholder="Fale sobre seu projeto" rows="4" required></textarea>
+                    <button type="submit" class="btn-submit">Enviar Proposta</button>
                 </form>
             </div>
         </section>
 
         <footer class="main-footer">
-            <div class="footer-content">
-                <p>&copy; 2025 Magnata Production - Todos os direitos reservados.</p>
-                <div class="footer-links">
-                    <a href="#">Privacidade</a>
-                    <a href="#">Termos de Uso</a>
-                </div>
+            <p>&copy; 2025 Magnata Production. All Rights Reserved.</p>
+        </footer >
+    </div>
+
+    <div id="projectModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img id="modal-img" src="" alt="">
+            <div class="modal-text">
+                <h3 id="modal-title"></h3>
+                <p id="modal-desc"></p>
             </div>
-        </footer>
+        </div>
     </div>
 
     <script src="script.js"></script>
