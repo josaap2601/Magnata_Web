@@ -1,39 +1,42 @@
+// Menu Toggle
 const hamburguer = document.querySelector(".hamburguer");
-const container = document.querySelector(".container");
-const menuLinks = document.querySelectorAll(".menu-link");
-const typingElement = document.getElementById("typing-text");
+const container = document.querySelector("body");
 
-// 1. Abrir/Fechar Menu
 hamburguer.addEventListener("click", () => {
     container.classList.toggle("show-menu");
 });
 
-// 2. Fechar ao clicar no link e Scroll Suave
-menuLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-        container.classList.remove("show-menu");
-    });
-});
+// Typing Effect
+const text = "Magnata Production.";
+const typingElement = document.getElementById("typing-text");
+let i = 0;
 
-// 3. Efeito Máquina de Escrever
-const text = "Magnata Production & Front End Designer";
-let index = 0;
-
-function typeWriter() {
-    if (index < text.length) {
-        typingElement.innerHTML += text.charAt(index);
-        index++;
-        setTimeout(typeWriter, 100); // Velocidade da digitação
+function type() {
+    if (i < text.length) {
+        typingElement.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, 150);
     }
 }
+window.onload = type;
 
-// Inicia o efeito quando a página carrega
-window.onload = typeWriter;
+// Modal Logic
+const modal = document.getElementById("projectModal");
+const modalImg = document.getElementById("modal-img");
+const modalTitle = document.getElementById("modal-title");
+const modalDesc = document.getElementById("modal-desc");
 
-// 4. Envio de Formulário (Simulação)
-const form = document.querySelector(".contact-form");
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("Obrigado! Sua mensagem foi enviada com sucesso.");
-    form.reset();
-});
+function openModal(img, title, desc) {
+    modal.style.display = "block";
+    modalImg.src = img;
+    modalTitle.innerHTML = title;
+    modalDesc.innerHTML = desc;
+}
+
+document.querySelector(".close-modal").onclick = () => modal.style.display = "none";
+window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; }
+
+// Smooth Scroll
+function scrollToId(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
