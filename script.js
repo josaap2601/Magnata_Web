@@ -1,45 +1,39 @@
-// Seleção dos elementos do DOM
 const hamburguer = document.querySelector(".hamburguer");
 const container = document.querySelector(".container");
-const sidebar = document.querySelector(".sidebar");
 const menuLinks = document.querySelectorAll(".menu-link");
+const typingElement = document.getElementById("typing-text");
 
-/**
- * Alternar Menu via Click
- */
+// 1. Abrir/Fechar Menu
 hamburguer.addEventListener("click", () => {
     container.classList.toggle("show-menu");
 });
 
-/**
- * Fechar ao clicar em um link
- */
+// 2. Fechar ao clicar no link e Scroll Suave
 menuLinks.forEach(link => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (e) => {
         container.classList.remove("show-menu");
     });
 });
 
-/**
- * Fechar ao clicar fora da sidebar (opcional, melhora UX)
- */
-window.addEventListener("click", (e) => {
-    if (container.classList.contains("show-menu") && 
-        !sidebar.contains(e.target) && 
-        !hamburguer.contains(e.target)) {
-        container.classList.remove("show-menu");
+// 3. Efeito Máquina de Escrever
+const text = "Magnata Production & Front End Designer";
+let index = 0;
+
+function typeWriter() {
+    if (index < text.length) {
+        typingElement.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 100); // Velocidade da digitação
     }
-});
+}
 
-// Efeito de scroll suave para links internos
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-    });
+// Inicia o efeito quando a página carrega
+window.onload = typeWriter;
+
+// 4. Envio de Formulário (Simulação)
+const form = document.querySelector(".contact-form");
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Obrigado! Sua mensagem foi enviada com sucesso.");
+    form.reset();
 });
