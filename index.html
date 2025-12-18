@@ -20,24 +20,22 @@
             <span>Menu</span>
         </div> 
 
-        <header>
+        <header id="home">
             <div class="img-wrapper">
                 <img src="img/bg.jpg" alt="Background Principal">
             </div>
             <div class="banner">
                 <h1>Magnata Production & Front End Designer</h1>
-                <button>Saiba mais</button>
+                <button onclick="document.getElementById('contato').scrollIntoView()">Fale Comigo</button>
             </div> 
         </header>
   
         <aside class="sidebar">
             <nav>
                 <ul class="menu">
-                    <li class="menu-item"><a href="#" class="menu-link">Home</a></li>
-                    <li class="menu-item"><a href="#conhecimentos" class="menu-link">Conhecimento</a></li>
+                    <li class="menu-item"><a href="#home" class="menu-link">Home</a></li>
                     <li class="menu-item"><a href="#projetos" class="menu-link">Projetos</a></li>
                     <li class="menu-item"><a href="#contato" class="menu-link">Contato</a></li>
-                    <li class="menu-item"><a href="#orcamento" class="menu-link">Orçamento</a></li>
                 </ul>
             </nav>
             <div class="social-media">
@@ -52,10 +50,8 @@
             <h2 class="section-title">Meus Projetos</h2>
             <div class="cards-container">
                 
-                <div class="card-img">
-                    
-                        <img src="img/conhecimentos.png" alt="Front-End Design">
-                    
+                <div class="card">
+                    <img src="img/conhecimentos.png" alt="Front-End Design">
                     <div class="card-content">
                         <h3>Front-End Design</h3>
                         <p>Criação de interfaces modernas com foco em usabilidade e performance.</p>
@@ -64,9 +60,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-img">
-                         <img src="img/social-media.jpg" alt="Social Media">
-                    </div>
+                    <img src="img/social-media.jpg" alt="Social Media">
                     <div class="card-content">
                         <h3>Social Media</h3>
                         <p>Gestão de marcas e criação de conteúdo visual para redes sociais.</p>
@@ -75,9 +69,7 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-img">
-                         <img src="img/web-dev.jpg" alt="Web Development">
-                    </div>
+                    <img src="img/web-dev.jpg" alt="Web Development">
                     <div class="card-content">
                         <h3>Web Development</h3>
                         <p>Sites responsivos que funcionam perfeitamente em qualquer tela.</p>
@@ -88,13 +80,30 @@
             </div>
         </main>
 
+        <section id="contato" class="contact-section">
+            <div class="contact-wrapper">
+                <h2 class="section-title">Contato</h2>
+                <form class="contact-form">
+                    <div class="input-group">
+                        <input type="text" placeholder="Seu Nome" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" placeholder="Seu E-mail" required>
+                    </div>
+                    <div class="input-group">
+                        <textarea placeholder="Sua Mensagem" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="card-btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+
         <footer class="main-footer">
             <div class="footer-content">
                 <p>&copy; 2025 Magnata Production - Todos os direitos reservados.</p>
                 <div class="footer-links">
                     <a href="#">Privacidade</a>
                     <a href="#">Termos de Uso</a>
-                    <a href="#">Contato</a>
                 </div>
             </div>
         </footer>
