@@ -25,8 +25,8 @@
                 <img src="img/bg.jpg" alt="Background Principal">
             </div>
             <div class="banner">
-                <h1>Magnata Production & Front End Designer</h1>
-                <button onclick="document.getElementById('contato').scrollIntoView()">Fale Comigo</button>
+                <h1 id="typing-text"></h1>
+                <button onclick="document.getElementById('contato').scrollIntoView({behavior:'smooth'})">Fale Comigo</button>
             </div> 
         </header>
   
@@ -54,7 +54,7 @@
                     <img src="img/conhecimentos.png" alt="Front-End Design">
                     <div class="card-content">
                         <h3>Front-End Design</h3>
-                        <p>Criação de interfaces modernas com foco em usabilidade e performance.</p>
+                        <p>Interfaces modernas com foco em usabilidade e performance.</p>
                         <a href="#" class="card-btn">Ver Detalhes</a>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <img src="img/social-media.jpg" alt="Social Media">
                     <div class="card-content">
                         <h3>Social Media</h3>
-                        <p>Gestão de marcas e criação de conteúdo visual para redes sociais.</p>
+                        <p>Gestão de marcas e criação de conteúdo visual estratégico.</p>
                         <a href="#" class="card-btn">Ver Detalhes</a>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <img src="img/web-dev.jpg" alt="Web Development">
                     <div class="card-content">
                         <h3>Web Development</h3>
-                        <p>Sites responsivos que funcionam perfeitamente em qualquer tela.</p>
+                        <p>Sites responsivos que funcionam em qualquer tela.</p>
                         <a href="#" class="card-btn">Ver Detalhes</a>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                     <div class="input-group">
                         <textarea placeholder="Sua Mensagem" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="card-btn">Enviar Mensagem</button>
+                    <button type="submit" class="card-btn-submit">Enviar Mensagem</button>
                 </form>
             </div>
         </section>
