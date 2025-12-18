@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link rel="stylesheet" href="css/estilo.css"/>
     <title>Magnata Production | Premium Portfolio</title>
 </head>
@@ -50,7 +50,7 @@
             <div class="social-media">
                 <a href="#"><i class="fab fa-facebook-f"></i></a>             
                 <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/SEUNUMERO" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </aside>
 
@@ -58,22 +58,32 @@
             <h2 class="section-title">Trabalhos em Destaque</h2>
             <div class="cards-container">
                 
-                <div class="card" onclick="openModal('img/conhecimentos.png', 'Front-End Design', 'Desenvolvimento de interfaces modernas e responsivas para o seu negócio.')">
+                <div class="card" onclick="openModal('img/conhecimentos.png', 'Front-End Design', 'Criação de sites profissionais com alta velocidade e design responsivo para todos os dispositivos.')">
                     <img src="img/conhecimentos.png" alt="Projeto 1">
                     <div class="card-overlay">
                         <div class="card-info">
                             <h3>Front-End Design</h3>
-                            <span>Toque para ver</span>
+                            <span>Clique para detalhes</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" onclick="openModal('img/social-media.jpg', 'Social Media', 'Gestão estratégica de redes sociais e criação de conteúdo viral.')">
+                <div class="card" onclick="openModal('img/social-media.jpg', 'Social Media', 'Gestão de marcas e criação de artes estratégicas para Instagram, Facebook e LinkedIn.')">
                     <img src="img/social-media.jpg" alt="Projeto 2">
                     <div class="card-overlay">
                         <div class="card-info">
                             <h3>Social Media</h3>
-                            <span>Toque para ver</span>
+                            <span>Clique para detalhes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" onclick="openModal('img/web-dev.jpg', 'Produção Visual', 'Edição de vídeos e tratamento de imagens com padrão cinematográfico.')">
+                    <img src="img/web-dev.jpg" alt="Projeto 3">
+                    <div class="card-overlay">
+                        <div class="card-info">
+                            <h3>Produção Visual</h3>
+                            <span>Clique para detalhes</span>
                         </div>
                     </div>
                 </div>
@@ -85,32 +95,37 @@
             <div class="contact-wrapper">
                 <div class="contact-info">
                     <h2>Vamos criar algo incrível?</h2>
-                    <p>Entre em contato para orçamentos ou parcerias.</p>
+                    <p>Transforme sua ideia em realidade com quem entende de design.</p>
                 </div>
                 <form class="contact-form">
-                    <input type="text" placeholder="Nome completo" required>
-                    <input type="email" placeholder="E-mail profissional" required>
-                    <textarea placeholder="Fale sobre seu projeto" rows="4" required></textarea>
+                    <input type="text" placeholder="Seu Nome" required>
+                    <input type="email" placeholder="Seu E-mail" required>
+                    <textarea placeholder="Descreva seu projeto ou sua dúvida" rows="4" required></textarea>
                     <button type="submit" class="btn-submit">Enviar Proposta</button>
                 </form>
             </div>
         </section>
 
         <footer class="main-footer">
-            <p>&copy; 2025 Magnata Production. All Rights Reserved.</p>
-        </footer >
+            <p>&copy; 2025 Magnata Production. Todos os direitos reservados.</p>
+        </footer>
     </div>
 
     <div id="projectModal" class="modal">
         <span class="close-modal">&times;</span>
-        <div class="modal-content">
+        <div class="modal-box">
             <img id="modal-img" src="" alt="">
             <div class="modal-text">
                 <h3 id="modal-title"></h3>
                 <p id="modal-desc"></p>
+                <button class="btn-primary" onclick="scrollToId('contato')">Solicitar similar</button>
             </div>
         </div>
     </div>
+
+    <a href="https://wa.me/SEUNUMERO" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script src="script.js"></script>
 </body>
