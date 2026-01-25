@@ -1,64 +1,73 @@
+let ytPlayer;
 
-// Seletores
-const hamburguer = document.querySelector(".hamburguer");
-const body = document.querySelector("body");
-const menuLinks = document.querySelectorAll(".menu-link");
-const typingElement = document.getElementById("typing-text");
-const modal = document.getElementById("projectModal");
-
-// Menu Toggle
-if (hamburguer) {
-    hamburguer.addEventListener("click", () => {
-        if (body) body.classList.toggle("show-menu");
-    });
-}
-
-menuLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        if (body) body.classList.remove("show-menu");
-    });
-});
-
-// Efeito Máquina de Escrever
+// EFEITO DE DIGITAÇÃO
 const text = "Magnata Production.";
 let charIndex = 0;
-
 function typeEffect() {
-    if (typingElement && charIndex < text.length) {
-        typingElement.textContent += text.charAt(charIndex);
+    const el = document.getElementById("typing-text");
+    if (el && charIndex < text.length) {
+        el.textContent += text.charAt(charIndex);
         charIndex++;
         setTimeout(typeEffect, 120);
     }
 }
 
-// Modal Logic
-function openModal(img, title, desc) {
-    document.getElementById("modal-img").src = img;
-    document.getElementById("modal-title").innerText = title;
-    document.getElementById("modal-desc").innerText = desc;
-    modal.style.display = "block";
-    body.style.overflow = "hidden";
+// MENU HAMBURGUER
+const btnMenu = document.getElementById("btn-menu");
+btnMenu.onclick = () => document.body.classList.toggle("show-menu");
+
+function handleNav(id) {
+    document.body.classList.remove("show-menu");
+    scrollToId(id);
 }
 
-function closeModalFunc() {
-    modal.style.display = "none";
-    body.style.overflow = "auto";
-}
-
-const closeModalBtn = document.querySelector(".close-modal");
-if (closeModalBtn) closeModalBtn.onclick = closeModalFunc;
-
-window.onclick = (event) => {
-    if (event.target == modal) closeModalFunc();
-};
-
-// Scroll Suave
 function scrollToId(id) {
-    const element = document.getElementById(id);
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(id);
+    if (el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' });
+}
+
+// FILTROS
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+    btn.onclick = () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.card').forEach(card => {
+            card.classList.add('hidden');
+            if (filter === 'all' || card.classList.contains(filter)) card.classList.remove('hidden');
+        });
+    };
+});
+
+// FUNÇÃO DE VÍDEO VIA API (CORRIGE ERRO LOCAL)
+function abrirVideo(id, titulo, descricao) {
+    document.getElementById("modal-title").innerText = titulo;
+    document.getElementById("modal-desc").innerText = descricao;
+    document.getElementById("projectModal").style.display = "block";
+    document.body.classList.add("no-scroll");
+
+    if (ytPlayer) {
+        ytPlayer.loadVideoById(id);
+    } else {
+        ytPlayer = new YT.Player('player', {
+            height: '100%',
+            width: '100%',
+            videoId: id,
+            playerVars: { 'autoplay': 1, 'rel': 0, 'origin': window.location.origin },
+        });
     }
 }
 
-// Init
-window.addEventListener("DOMContentLoaded", typeEffect);
+function closeModalFunc() {
+    document.getElementById("projectModal").style.display = "none";
+    if (ytPlayer) ytPlayer.stopVideo();
+    document.body.classList.remove("no-scroll");
+}
+
+window.onload = typeEffect;
+window.onscroll = () => {
+    document.querySelectorAll('.reveal').forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
+    });
+};
