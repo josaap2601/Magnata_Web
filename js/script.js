@@ -52,7 +52,7 @@ filterBtns.forEach(btn => {
     };
 });
 
-// PLAYLIST DE VÍDEOS (AUTOPLAY SEQUENCIAL)
+// PLAYLIST DE VÍDEOS DE PROJETOS
 const playlistVideos = [
     {
         id: 'Q5U9aMsqBzo',
@@ -105,7 +105,6 @@ function carregarVideoModal(videoObj) {
     }
 }
 
-// PASSA AUTOMATICAMENTE AO TERMINAR
 function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.ENDED) {
         proximoVideo();
@@ -151,7 +150,7 @@ function closeImageModal() {
 }
 
 // =========================================================
-// PLAYER DE MÚSICA MP3 LOCAL / GITHUB
+// PLAYER DE MÚSICA MP3 (BUSCA DO GITHUB)
 // =========================================================
 const GITHUB_USER = 'josaap2601';
 const GITHUB_REPO = 'Magnata_Web';
@@ -159,10 +158,10 @@ const GITHUB_FOLDER = 'musicas';
 
 let playlistMp3 = [];
 let mp3Index = 0;
-let audioElement = null;
+let audioElement = document.getElementById("audio-element");
 
 async function carregarMusicasDoGithub() {
-    audioElement = document.getElementById("audio-element");
+    if (!audioElement) audioElement = document.getElementById("audio-element");
     if (audioElement) {
         audioElement.onended = () => nextMp3();
     }
@@ -171,7 +170,7 @@ async function carregarMusicasDoGithub() {
     
     try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error("Erro na conexão");
+        if (!response.ok) throw new Error("Erro de conexão com o GitHub");
 
         const files = await response.json();
         const mp3Files = files.filter(file => file.name.toLowerCase().endsWith('.mp3'));
@@ -185,12 +184,12 @@ async function carregarMusicasDoGithub() {
             loadMp3(0);
         } else {
             const el = document.getElementById("mp3-title");
-            if (el) el.innerText = "Nenhuma música na pasta";
+            if (el) el.innerText = "Nenhuma música encontrada";
         }
     } catch (error) {
         console.error("Erro ao carregar músicas:", error);
         const el = document.getElementById("mp3-title");
-        if (el) el.innerText = "Aguardando faixas...";
+        if (el) el.innerText = "Selecione uma música";
     }
 }
 
@@ -209,13 +208,15 @@ function toggleMp3() {
     if (!audioElement) audioElement = document.getElementById("audio-element");
     const btn = document.getElementById("btn-mp3-play");
 
-    if (!audioElement.src && playlistMp3.length > 0) loadMp3(0);
+    if (!audioElement.src && playlistMp3.length > 0) {
+        loadMp3(mp3Index);
+    }
 
     if (audioElement.paused) {
-        if (isRadioPlaying) toggleRadio();
+        if (isRadioPlaying) toggleRadio(); // Se a rádio estiver tocando, pausa ela
         audioElement.play().then(() => {
             if (btn) btn.innerHTML = '<i class="fas fa-pause"></i>';
-        }).catch(e => console.error("Erro ao reproduzir:", e));
+        }).catch(e => console.error("Erro ao dar play:", e));
     } else {
         audioElement.pause();
         if (btn) btn.innerHTML = '<i class="fas fa-play"></i>';
@@ -245,7 +246,7 @@ function prevMp3() {
 }
 
 // =========================================================
-// PLAYER DA RÁDIO ONLINE
+// PLAYER DA RÁDIO WEB
 // =========================================================
 let isRadioPlaying = false;
 const STREAM_URL = "https://seu-servidor-de-stream.com/stream"; 
@@ -268,7 +269,7 @@ function toggleRadio() {
             
             if (audioElement && !audioElement.paused) toggleMp3();
         }).catch(() => {
-            if (status) status.innerText = "Erro ao conectar com a rádio";
+            if (status) status.innerText = "Erro ao conectar à rádio";
         });
     } else {
         radioStream.pause();

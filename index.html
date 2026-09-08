@@ -15,7 +15,7 @@
             <span>&nbsp;&nbsp;&nbsp; 🚀 Magnata Production: Design & Audiovisual de Elite</span>
             <span>🔥 PROMOÇÃO: Identidade Visual com 20% OFF</span>
             <span>🎙️ RÁDIO MAGNATA: Transmissão ao vivo com locuções exclusivas</span>
-            <span>Transformamos Ideias em Experiências Digitais Ajudamos a sua marca a se destacar no mercado digital através de design estratégico, interfaces intuitivas e soluções visuais de alto impacto. Combinamos estética e funcionalidade para conectar o seu negócio ao público certo.</span>
+            <span>Transformamos Ideias em Experiências Digitais. Ajudamos a sua marca a se destacar no mercado digital através de design estratégico e audiovisual de alto impacto.</span>
         </div>
     </div>
 
@@ -108,29 +108,30 @@
         </div>
     </section>
 
-    <!-- SEÇÃO SOBRE (COM ESTRUTURA VERTICAL SOLICITADA) -->
-    <section id="sobre" class="sobre-container">
-        <div class="sobre-bloco reveal">
-            <!-- 1. TEXTO INICIAL -->
-            <div class="sobre-texto-topo">
-                <h2>Sobre a Magnata Production</h2>
+    <!-- SEÇÃO SOBRE (LADO A LADO ALTERNADO) -->
+    <section id="sobre" class="sobre-section">
+        <h2 style="text-align: center; font-size: 2.8rem; margin-bottom: 50px;" class="reveal">Sobre a Magnata Production</h2>
+
+        <!-- BLOCO 1: TEXTO À ESQUERDA, IMAGEM À DIREITA -->
+        <div class="sobre-item reveal">
+            <div class="sobre-texto">
+                <h3>Design & Estrutura de Alto Nível</h3>
                 <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto. Combinamos criatividade e tecnologia para elevar a presença visual do seu negócio.</p>
             </div>
-
-            <!-- 2. PRIMEIRA IMAGEM -->
-            <div class="imagem-vertical" onclick="abrirImagem('img/proj1.jpg', 'Estúdio & Estrutura', 'Equipamentos de última geração para produções de alto nível.')">
+            <div class="sobre-imagem" onclick="abrirImagem('img/proj1.jpg', 'Estúdio & Estrutura', 'Equipamentos de última geração para produções de alto nível.')">
                 <img src="img/proj1.jpg" alt="Sobre a Magnata Production 1">
                 <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
             </div>
+        </div>
 
-            <!-- 3. SEGUNDA IMAGEM -->
-            <div class="imagem-vertical" onclick="abrirImagem('img/proj2.jpg', 'Produção Audiovisual', 'Nossa equipe em ação desenvolvendo projetos exclusivos.')">
+        <!-- BLOCO 2: IMAGEM À ESQUERDA, TEXTO À DIREITA -->
+        <div class="sobre-item reverse reveal">
+            <div class="sobre-imagem" onclick="abrirImagem('img/proj2.jpg', 'Produção Audiovisual', 'Nossa equipe em ação desenvolvendo projetos exclusivos.')">
                 <img src="img/proj2.jpg" alt="Sobre a Magnata Production 2">
                 <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
             </div>
-
-            <!-- 4. TEXTO FINAL -->
-            <div class="sobre-texto-rodape">
+            <div class="sobre-texto">
+                <h3>Resultados Cinematográficos</h3>
                 <p>Nosso compromisso é entregar resultados cinematográficos e estratégias visuais personalizadas para cada cliente. Do conceito inicial à pós-produção, cuidamos de cada detalhe com excelência.</p>
             </div>
         </div>
@@ -156,13 +157,13 @@
         <p>&copy; 2026 Magnata Production. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- BARRA FLUTUANTE PLAYER MP3 -->
+    <!-- BARRA FLUTUANTE PLAYER MP3 LOCAL / GITHUB -->
     <div class="music-bar" id="music-player">
         <div class="track-info">
             <i class="fas fa-music"></i>
             <div>
-                <strong id="mp3-title">Selecione uma faixa</strong>
-                <small id="mp3-artist">Pasta local: /musicas</small>
+                <strong id="mp3-title">Carregando Músicas...</strong>
+                <small id="mp3-artist">Magnata Sound</small>
             </div>
         </div>
         <div class="player-controls">
@@ -173,7 +174,7 @@
         <audio id="audio-element"></audio>
     </div>
 
-    <!-- MODAL DE VÍDEO COM AUTOPLAY SEQUENCIAL -->
+    <!-- MODAL DE VÍDEO -->
     <div id="projectModal" class="modal">
         <span class="close-modal" onclick="closeModalFunc()">&times;</span>
         <div class="modal-box">
