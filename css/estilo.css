@@ -321,14 +321,25 @@ header {
     opacity: 1;
 }
 
-/* SEÇÃO SOBRE */
-.sobre {
+/* SEÇÃO SOBRE (MÚLTIPLOS BLOCOS ZIGUE-ZAGUE) */
+.sobre-container {
     padding: 100px 8%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.sobre-bloco {
     display: flex;
     align-items: center;
     gap: 50px;
-    max-width: 1200px;
-    margin: 0 auto;
+}
+
+/* Inverte a ordem do texto e da imagem nos blocos com classe .reverse */
+.sobre-bloco.reverse {
+    flex-direction: row-reverse;
 }
 
 .sobre-texto {
@@ -336,7 +347,7 @@ header {
 }
 
 .sobre-texto h2 {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     color: #fff;
     margin-bottom: 20px;
 }
@@ -353,17 +364,27 @@ header {
 
 .imagem-lado img {
     width: 100%;
-    height: 400px;
+    height: 380px;
     object-fit: cover;
     border-radius: 25px;
     border: 1px solid var(--glass);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.5s ease;
+}
+
+.imagem-lado img:hover {
+    transform: scale(1.03);
 }
 
 @media (max-width: 768px) {
-    .sobre {
-        flex-direction: column;
+    .sobre-container {
         padding: 60px 8%;
+        gap: 60px;
+    }
+
+    .sobre-bloco,
+    .sobre-bloco.reverse {
+        flex-direction: column;
     }
 }
 

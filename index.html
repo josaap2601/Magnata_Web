@@ -34,7 +34,8 @@
     <header id="home">
         <div class="img-wrapper"><img src="img/bg.jpg" alt="Background"></div>
         <div class="banner">
-            <h1 id="typing-text">Magnata ttttt Production</h1>
+            <!-- Deixado vazio para o JS preencher via efeito de digitação -->
+            <h1 id="typing-text"></h1>
             <p class="subtitle reveal">Produção Audiovisual Profissional</p>
             <div class="banner-buttons reveal">
                 <button class="btn-primary" onclick="scrollToId('projetos')">Ver Projetos</button>
@@ -72,16 +73,42 @@
         </div>
     </main>
 
-    <!-- Seção Sobre (Corrigida e Alinhada) -->
-    <section id="sobre" class="sobre reveal">
-        <div class="sobre-texto">
-            <h2>Sobre a Magnata Production</h2>
-            <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto. Criamos soluções visuais completas para elevar o nível da sua marca, desde identidades visuais marcantes até vídeos promocionais e aplicações web modernas.</p>
-        </div>
+    <!-- Seção Sobre Expandida com Múltiplos Blocos Alternados -->
+    <section id="sobre" class="sobre-container">
         
-        <div class="imagem-lado">
-            <img src="img/proj1.jpg" alt="Sobre a Magnata Production">
+        <!-- Bloco 1: Texto na Esquerda, Imagem na Direita -->
+        <div class="sobre-bloco reveal">
+            <div class="sobre-texto">
+                <h2>Sobre a Magnata Production</h2>
+                <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto. Criamos soluções visuais completas para elevar o nível da sua marca, desde identidades visuais marcantes até vídeos promocionais e aplicações web modernas.</p>
+            </div>
+            <div class="imagem-lado">
+                <img src="img/proj1.jpg" alt="Sobre a Magnata Production">
+            </div>
         </div>
+
+        <!-- Bloco 2: Imagem na Esquerda, Texto na Direita (Invertido) -->
+        <div class="sobre-bloco reverse reveal">
+            <div class="sobre-texto">
+                <h2>Produção Audiovisual de Elite</h2>
+                <p>Nossas produções em vídeo contam com edição profissional, color grading avançado e sound design imersivo. Garantimos que a mensagem da sua empresa seja transmitida com clareza e autoridade no mercado.</p>
+            </div>
+            <div class="imagem-lado">
+                <img src="img/bg.jpg" alt="Produção Audiovisual">
+            </div>
+        </div>
+
+        <!-- Bloco 3: Texto na Esquerda, Imagem na Direita -->
+        <div class="sobre-bloco reveal">
+            <div class="sobre-texto">
+                <h2>Design & Identidade Visual</h2>
+                <p>Desenvolvemos conceitos gráficos sólidos que destacam a essência do seu negócio. Projetamos logotipos, mídias sociais e materiais gráficos completos com um padrão estético de alto nível.</p>
+            </div>
+            <div class="imagem-lado">
+                <img src="img/conhecimentos.png" alt="Design & Identidade Visual">
+            </div>
+        </div>
+
     </section>
 
     <section id="contato" style="padding: 100px 8%; background: #000;">
