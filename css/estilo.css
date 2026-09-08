@@ -389,6 +389,61 @@ header {
     color: #888;
 }
 
+/* SOBRE (ATUALIZADO) */
+.sobre-container { 
+    padding: 100px 5%; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+.sobre-bloco { 
+    display: flex; 
+    align-items: center; 
+    gap: 40px; 
+}
+
+.sobre-texto { 
+    flex: 1; 
+}
+
+.galeria-sobre {
+    flex: 1.2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.imagem-lado { 
+    position: relative; 
+    cursor: pointer; 
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.imagem-lado img { 
+    width: 100%; 
+    height: 280px; 
+    object-fit: cover; 
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+.imagem-lado:hover img {
+    transform: scale(1.05);
+}
+
+.zoom-hint {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    pointer-events: none;
+}
+
 /* MUSIC BAR MP3 LOCAL */
 .music-bar {
     position: fixed;
@@ -439,13 +494,6 @@ header {
 .player-controls button:hover {
     color: var(--primary);
 }
-
-/* SOBRE */
-.sobre-container { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
-.sobre-bloco { display: flex; align-items: center; gap: 60px; }
-.sobre-texto { flex: 1.2; }
-.imagem-lado { flex: 1; position: relative; cursor: pointer; }
-.imagem-lado img { width: 100%; height: 420px; object-fit: cover; border-radius: 25px; }
 
 /* MODAL */
 .modal {
@@ -520,4 +568,5 @@ footer { padding: 80px 8% 40px; background: #050505; text-align: center; }
 @media (max-width: 768px) {
     .sidebar { width: 80%; }
     .sobre-bloco { flex-direction: column; }
+    .galeria-sobre { width: 100%; grid-template-columns: 1fr; }
 }
