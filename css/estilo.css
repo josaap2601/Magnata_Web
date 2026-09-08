@@ -375,6 +375,53 @@ header {
     z-index: 2100;
 }
 
+/* sobre-section*/
+
+.sobre-section{
+    display: flex; /* Coloca os itens lado a lado */
+    align-items: center; /* Alinha verticalmente ao centro */
+    gap: 40px; /* Espaço entre o texto e a imagem */
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* Caixa de texto */
+.sobre-section {
+    flex: 1; /* Ocupa o espaço proporcional */
+}
+
+.sobre-section h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.sobre-section p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Caixa de imagem */
+.imagem-lado {
+    flex: 1;
+}
+
+.imagem-lado img {
+    width: 100%; /* Deixa a imagem responsiva */
+    height: auto;
+    border-radius: 8px; /* Cantos arredondados opcionais */
+}
+
+/* Versão para celular (empilha os itens) */
+@media (max-width: 768px) {
+    .secao-conteudo {
+        flex-direction: column; /* Joga um elemento para baixo do outro */
+    }
+}
+    
+
 /* FOOTER & CONTATO */
 footer {
     padding: 80px 8% 40px;
