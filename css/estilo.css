@@ -213,8 +213,8 @@ header {
 .sidebar {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 100%;
+    right: -50%;
+    width: 50%;
     max-width: 400px;
     height: 100vh;
     background: rgba(0, 0, 0, 0.98);
