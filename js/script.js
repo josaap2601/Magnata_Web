@@ -151,7 +151,7 @@ function closeImageModal() {
 }
 
 // =========================================================
-// PLAYER DE MÚSICA - BUSCA AUTOMÁTICA DO GITHUB
+// PLAYER DE MÚSICA MP3 LOCAL / GITHUB
 // =========================================================
 const GITHUB_USER = 'josaap2601';
 const GITHUB_REPO = 'Magnata_Web';
@@ -159,9 +159,14 @@ const GITHUB_FOLDER = 'musicas';
 
 let playlistMp3 = [];
 let mp3Index = 0;
-const audioElement = document.getElementById("audio-element");
+let audioElement = null;
 
 async function carregarMusicasDoGithub() {
+    audioElement = document.getElementById("audio-element");
+    if (audioElement) {
+        audioElement.onended = () => nextMp3();
+    }
+
     const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}`;
     
     try {
@@ -179,32 +184,41 @@ async function carregarMusicasDoGithub() {
             }));
             loadMp3(0);
         } else {
-            document.getElementById("mp3-title").innerText = "Nenhuma música na pasta";
+            const el = document.getElementById("mp3-title");
+            if (el) el.innerText = "Nenhuma música na pasta";
         }
     } catch (error) {
         console.error("Erro ao carregar músicas:", error);
-        document.getElementById("mp3-title").innerText = "Aguardando faixas...";
+        const el = document.getElementById("mp3-title");
+        if (el) el.innerText = "Aguardando faixas...";
     }
 }
 
 function loadMp3(index) {
-    if (playlistMp3[index]) {
+    if (!audioElement) audioElement = document.getElementById("audio-element");
+    if (playlistMp3[index] && audioElement) {
         audioElement.src = playlistMp3[index].src;
-        document.getElementById("mp3-title").innerText = playlistMp3[index].title;
-        document.getElementById("mp3-artist").innerText = playlistMp3[index].artist;
+        const title = document.getElementById("mp3-title");
+        const artist = document.getElementById("mp3-artist");
+        if (title) title.innerText = playlistMp3[index].title;
+        if (artist) artist.innerText = playlistMp3[index].artist;
     }
 }
 
 function toggleMp3() {
+    if (!audioElement) audioElement = document.getElementById("audio-element");
     const btn = document.getElementById("btn-mp3-play");
+
     if (!audioElement.src && playlistMp3.length > 0) loadMp3(0);
 
     if (audioElement.paused) {
-        audioElement.play();
-        btn.innerHTML = '<i class="fas fa-pause"></i>';
+        if (isRadioPlaying) toggleRadio();
+        audioElement.play().then(() => {
+            if (btn) btn.innerHTML = '<i class="fas fa-pause"></i>';
+        }).catch(e => console.error("Erro ao reproduzir:", e));
     } else {
         audioElement.pause();
-        btn.innerHTML = '<i class="fas fa-play"></i>';
+        if (btn) btn.innerHTML = '<i class="fas fa-play"></i>';
     }
 }
 
@@ -212,47 +226,57 @@ function nextMp3() {
     if (playlistMp3.length === 0) return;
     mp3Index = (mp3Index + 1) % playlistMp3.length;
     loadMp3(mp3Index);
-    audioElement.play();
-    document.getElementById("btn-mp3-play").innerHTML = '<i class="fas fa-pause"></i>';
+    if (audioElement) {
+        audioElement.play();
+        const btn = document.getElementById("btn-mp3-play");
+        if (btn) btn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
 }
 
 function prevMp3() {
     if (playlistMp3.length === 0) return;
     mp3Index = (mp3Index - 1 + playlistMp3.length) % playlistMp3.length;
     loadMp3(mp3Index);
-    audioElement.play();
-    document.getElementById("btn-mp3-play").innerHTML = '<i class="fas fa-pause"></i>';
+    if (audioElement) {
+        audioElement.play();
+        const btn = document.getElementById("btn-mp3-play");
+        if (btn) btn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
 }
 
+// =========================================================
 // PLAYER DA RÁDIO ONLINE
+// =========================================================
 let isRadioPlaying = false;
-const radioStream = document.getElementById("radio-stream");
 const STREAM_URL = "https://seu-servidor-de-stream.com/stream"; 
 
 function toggleRadio() {
+    const radioStream = document.getElementById("radio-stream");
     const icon = document.getElementById("radio-icon");
     const status = document.getElementById("radio-status");
     const visualizer = document.querySelector(".radio-visualizer");
+
+    if (!radioStream) return;
 
     if (!isRadioPlaying) {
         radioStream.src = STREAM_URL;
         radioStream.play().then(() => {
             isRadioPlaying = true;
-            icon.className = "fas fa-stop";
-            status.innerText = "Sintonizado - Transmissão Magnata";
-            visualizer.classList.add("playing");
+            if (icon) icon.className = "fas fa-stop";
+            if (status) status.innerText = "Sintonizado - Transmissão Magnata";
+            if (visualizer) visualizer.classList.add("playing");
             
-            if (!audioElement.paused) toggleMp3();
+            if (audioElement && !audioElement.paused) toggleMp3();
         }).catch(() => {
-            status.innerText = "Erro ao conectar com a rádio";
+            if (status) status.innerText = "Erro ao conectar com a rádio";
         });
     } else {
         radioStream.pause();
         radioStream.src = "";
         isRadioPlaying = false;
-        icon.className = "fas fa-play";
-        status.innerText = "Transmissão Pausada";
-        visualizer.classList.remove("playing");
+        if (icon) icon.className = "fas fa-play";
+        if (status) status.innerText = "Transmissão Pausada";
+        if (visualizer) visualizer.classList.remove("playing");
     }
 }
 
