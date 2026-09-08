@@ -14,7 +14,7 @@
         <div class="ads-track">
             <span>🚀 Magnata Production: Design & Audiovisual de Elite</span>
             <span>🔥 PROMOÇÃO: Identidade Visual com 20% OFF</span>
-            <span>🚀 Magnata Production: Criação de site & App</span>
+            <span>🎙️ RÁDIO MAGNATA: Transmissão ao vivo com locuções exclusivas</span>
         </div>
     </div>
 
@@ -28,6 +28,7 @@
     <aside class="sidebar" id="sidebar">
         <span class="menu-link" onclick="handleNav('home')">Início</span>
         <span class="menu-link" onclick="handleNav('projetos')">Projetos</span>
+        <span class="menu-link" onclick="handleNav('radio')">Rádio Web</span>
         <span class="menu-link" onclick="handleNav('sobre')">Sobre</span>
         <span class="menu-link" onclick="handleNav('contato')">Orçamento</span>
     </aside>
@@ -36,10 +37,10 @@
         <div class="img-wrapper"><img src="img/bg.jpg" alt="Background"></div>
         <div class="banner">
             <h1 id="typing-text"></h1>
-            <p class="subtitle reveal">Produção Audiovisual Profissional</p>
+            <p class="subtitle reveal">Produção Audiovisual & Radiofusão Profissional</p>
             <div class="banner-buttons reveal">
                 <button class="btn-primary" onclick="scrollToId('projetos')">Ver Projetos</button>
-                <button class="btn-outline" onclick="scrollToId('contato')">Falar Conosco</button>
+                <button class="btn-outline" onclick="scrollToId('radio')">Ouvir Rádio</button>
             </div>
         </div>
     </header>
@@ -54,61 +55,70 @@
         </div>
 
         <div class="cards-container">
-            <div class="card reveal video" onclick="abrirVideo('Q5U9aMsqBzo', 'Showreel Visual 2026', 'Edição dinâmica, transições fluídas e color grading cinematográfico para marcas de prestígio.')">
+            <div class="card reveal video" onclick="abrirPlaylistIndex(0)">
                 <img src="https://img.youtube.com/vi/Q5U9aMsqBzo/maxresdefault.jpg" alt="Thumb">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="card-overlay"><h3>Visual</h3><p>Showreel 2026</p></div>
             </div>
 
-            <div class="card reveal video" onclick="abrirVideo('goH09yHozog', 'Showreel Audiovisual', 'Produção completa para campanhas publicitárias e videoclipes de alto impacto.')">
+            <div class="card reveal video" onclick="abrirPlaylistIndex(1)">
                 <img src="https://img.youtube.com/vi/goH09yHozog/maxresdefault.jpg" alt="Thumb">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="card-overlay"><h3>Audiovisual</h3><p>Showreel 2026</p></div>
             </div>
 
-            <div class="card reveal web" onclick="abrirImagem('img/conhecimentos.png', 'Brand Design & Identidade Visual', 'Construção de marca moderna com paleta de cores estrategicamente elaborada e posicionamento premium.')">
+            <div class="card reveal web" onclick="abrirImagem('img/conhecimentos.png', 'Brand Design & Identidade Visual', 'Construção de marca moderna com paleta de cores estrategicamente elaborada.')">
                 <img src="img/conhecimentos.png" alt="Design">
                 <div class="card-overlay"><h3>Brand Design</h3><p>Identidade Visual</p></div>
             </div>
         </div>
     </main>
 
-    <!-- Seção Sobre Expandida -->
+    <!-- SEÇÃO RÁDIO WEB MAGNATA -->
+    <section id="radio" class="radio-section reveal">
+        <div class="radio-container">
+            <div class="radio-header">
+                <span class="badge-live"><i class="fas fa-circle"></i> NO AR</span>
+                <h2>Rádio Magnata Web</h2>
+                <p>Locuções profissionais, vinhetas personalizadas e a melhor seleção musical 24/7.</p>
+            </div>
+
+            <div class="radio-player-box">
+                <div class="radio-visualizer">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                
+                <div class="radio-controls">
+                    <button id="btn-radio-play" class="btn-primary-circle" onclick="toggleRadio()">
+                        <i class="fas fa-play" id="radio-icon"></i>
+                    </button>
+                    <div class="radio-info">
+                        <span id="radio-status">Transmissão Offline</span>
+                        <small>Insira a URL do seu servidor Icecast/Shoutcast</small>
+                    </div>
+                </div>
+
+                <audio id="radio-stream" src=""></audio>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SOBRE -->
     <section id="sobre" class="sobre-container">
-        
         <div class="sobre-bloco reveal">
             <div class="sobre-texto">
                 <h2>Sobre a Magnata Production</h2>
-                <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto. Criamos soluções visuais completas para elevar o nível da sua marca.</p>
+                <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto.</p>
             </div>
-            <div class="imagem-lado" onclick="abrirImagem('img/proj1.jpg', 'Estúdio & Estrutura', 'Equipamentos de última geração para gravações em 4K e pós-produção avançada.')">
+            <div class="imagem-lado" onclick="abrirImagem('img/proj1.jpg', 'Estúdio & Estrutura', 'Equipamentos de última geração.')">
                 <img src="img/proj1.jpg" alt="Sobre a Magnata Production">
                 <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
             </div>
         </div>
-
-        <div class="sobre-bloco reverse reveal">
-            <div class="sobre-texto">
-                <h2>Produção Audiovisual de Elite</h2>
-                <p>Nossas produções em vídeo contam com edição profissional, color grading avançado e sound design imersivo para garantir máxima autoridade no mercado.</p>
-            </div>
-            <div class="imagem-lado" onclick="abrirImagem('img/bg.jpg', 'Cinematografia', 'Direção de cena e iluminação de estúdio para gravações de alto padrão.')">
-                <img src="img/bg.jpg" alt="Produção Audiovisual">
-                <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
-            </div>
-        </div>
-
-        <div class="sobre-bloco reveal">
-            <div class="sobre-texto">
-                <h2>Design & Identidade Visual</h2>
-                <p>Desenvolvemos conceitos gráficos sólidos que destacam a essência do seu negócio. Projetamos logotipos e materiais gráficos com padrão estético internacional.</p>
-            </div>
-            <div class="imagem-lado" onclick="abrirImagem('img/conhecimentos.png', 'Design Estratégico', 'Projetos visuais focados em conversão e retenção de público.')">
-                <img src="img/conhecimentos.png" alt="Design & Identidade Visual">
-                <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
-            </div>
-        </div>
-
     </section>
 
     <section id="contato" style="padding: 100px 8%; background: #000;">
@@ -131,7 +141,24 @@
         <p>&copy; 2026 Magnata Production. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- MODAL DE VÍDEO -->
+    <!-- BARRA FLUTUANTE PLAYER MP3 (PASTA LOCAL musicas/) -->
+    <div class="music-bar" id="music-player">
+        <div class="track-info">
+            <i class="fas fa-music"></i>
+            <div>
+                <strong id="mp3-title">Selecione uma faixa</strong>
+                <small id="mp3-artist">Pasta local: /musicas</small>
+            </div>
+        </div>
+        <div class="player-controls">
+            <button onclick="prevMp3()"><i class="fas fa-step-backward"></i></button>
+            <button onclick="toggleMp3()" id="btn-mp3-play"><i class="fas fa-play"></i></button>
+            <button onclick="nextMp3()"><i class="fas fa-step-forward"></i></button>
+        </div>
+        <audio id="audio-element" onended="nextMp3()"></audio>
+    </div>
+
+    <!-- MODAL DE VÍDEO COM AUTOPLAY SEQUENCIAL -->
     <div id="projectModal" class="modal">
         <span class="close-modal" onclick="closeModalFunc()">&times;</span>
         <div class="modal-box">
@@ -141,12 +168,15 @@
             <div class="modal-info">
                 <h2 id="modal-title"></h2>
                 <p id="modal-desc"></p>
-                <button class="btn-primary" onclick="closeModalFunc()">Fechar Player</button>
+                <div class="playlist-controls">
+                    <button class="btn-outline" onclick="videoAnterior()"><i class="fas fa-step-backward"></i> Anterior</button>
+                    <button class="btn-outline" onclick="proximoVideo()">Próximo <i class="fas fa-step-forward"></i></button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL DE IMAGEM (LIGHTBOX) -->
+    <!-- MODAL DE IMAGEM -->
     <div id="imageModal" class="modal">
         <span class="close-modal" onclick="closeImageModal()">&times;</span>
         <div class="modal-box img-modal-box">

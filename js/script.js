@@ -13,7 +13,7 @@ function typeEffect() {
     }
 }
 
-// MENU HAMBURGUER
+// MENU HAMBÚRGUER
 const btnMenu = document.getElementById("btn-menu");
 if (btnMenu) {
     btnMenu.onclick = () => document.body.classList.toggle("show-menu");
@@ -34,7 +34,7 @@ function scrollToId(id) {
     }
 }
 
-// FILTROS DE PROJETOS
+// FILTROS
 const filterBtns = document.querySelectorAll('.filter-btn');
 filterBtns.forEach(btn => {
     btn.onclick = () => {
@@ -52,14 +52,34 @@ filterBtns.forEach(btn => {
     };
 });
 
-// ABRIR E FECHAR MODAL DE VÍDEO
-function abrirVideo(id, titulo, descricao) {
+// PLAYLIST DE VÍDEOS (AUTOPLAY SEQUENCIAL)
+const playlistVideos = [
+    {
+        id: 'Q5U9aMsqBzo',
+        titulo: 'Showreel Visual 2026',
+        desc: 'Edição dinâmica, transições fluídas e color grading cinematográfico para marcas de prestígio.'
+    },
+    {
+        id: 'goH09yHozog',
+        titulo: 'Showreel Audiovisual',
+        desc: 'Produção completa para campanhas publicitárias e videoclipes de alto impacto.'
+    }
+];
+
+let currentVideoIndex = 0;
+
+function abrirPlaylistIndex(index) {
+    currentVideoIndex = index;
+    carregarVideoModal(playlistVideos[currentVideoIndex]);
+}
+
+function carregarVideoModal(videoObj) {
     const modal = document.getElementById("projectModal");
     const modalTitle = document.getElementById("modal-title");
     const modalDesc = document.getElementById("modal-desc");
 
-    if (modalTitle) modalTitle.innerText = titulo;
-    if (modalDesc) modalDesc.innerText = descricao;
+    if (modalTitle) modalTitle.innerText = videoObj.titulo;
+    if (modalDesc) modalDesc.innerText = videoObj.desc;
     
     if (modal) {
         modal.classList.add("active-modal");
@@ -67,19 +87,39 @@ function abrirVideo(id, titulo, descricao) {
     }
 
     if (ytPlayer && typeof ytPlayer.loadVideoById === 'function') {
-        ytPlayer.loadVideoById(id);
+        ytPlayer.loadVideoById(videoObj.id);
     } else {
         ytPlayer = new YT.Player('player', {
             height: '100%',
             width: '100%',
-            videoId: id,
+            videoId: videoObj.id,
             playerVars: { 
                 'autoplay': 1, 
                 'rel': 0, 
                 'origin': window.location.origin 
             },
+            events: {
+                'onStateChange': onPlayerStateChange
+            }
         });
     }
+}
+
+// PASSA AUTOMATICAMENTE AO TERMINAR
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+        proximoVideo();
+    }
+}
+
+function proximoVideo() {
+    currentVideoIndex = (currentVideoIndex + 1) % playlistVideos.length;
+    carregarVideoModal(playlistVideos[currentVideoIndex]);
+}
+
+function videoAnterior() {
+    currentVideoIndex = (currentVideoIndex - 1 + playlistVideos.length) % playlistVideos.length;
+    carregarVideoModal(playlistVideos[currentVideoIndex]);
 }
 
 function closeModalFunc() {
@@ -91,16 +131,12 @@ function closeModalFunc() {
     document.body.classList.remove("no-scroll");
 }
 
-// ABRIR E FECHAR MODAL DE IMAGEM
+// MODAL DE IMAGEM
 function abrirImagem(src, titulo, descricao) {
     const imgModal = document.getElementById("imageModal");
-    const imgModalSrc = document.getElementById("imgModalSrc");
-    const imgModalTitle = document.getElementById("imgModalTitle");
-    const imgModalDesc = document.getElementById("imgModalDesc");
-
-    if (imgModalSrc) imgModalSrc.src = src;
-    if (imgModalTitle) imgModalTitle.innerText = titulo;
-    if (imgModalDesc) imgModalDesc.innerText = descricao;
+    document.getElementById("imgModalSrc").src = src;
+    document.getElementById("imgModalTitle").innerText = titulo;
+    document.getElementById("imgModalDesc").innerText = descricao;
 
     if (imgModal) {
         imgModal.classList.add("active-modal");
@@ -114,32 +150,99 @@ function closeImageModal() {
     document.body.classList.remove("no-scroll");
 }
 
-// FECHAR MODAL AO CLICAR FORA
-window.onclick = (e) => {
-    const projectModal = document.getElementById("projectModal");
-    const imageModal = document.getElementById("imageModal");
+// PLAYER DE MÚSICA LOCAL MP3 (pasta /musicas)
+const playlistMp3 = [
+    { title: "Faixa 01", artist: "Magnata Sound", src: "musicas/musica1.mp3" },
+    { title: "Faixa 02", artist: "Magnata Sound", src: "musicas/musica2.mp3" }
+];
 
-    if (e.target === projectModal) closeModalFunc();
-    if (e.target === imageModal) closeImageModal();
-};
+let mp3Index = 0;
+const audioElement = document.getElementById("audio-element");
 
-// ANIMAÇÃO REVEAL
+function loadMp3(index) {
+    if (playlistMp3[index]) {
+        audioElement.src = playlistMp3[index].src;
+        document.getElementById("mp3-title").innerText = playlistMp3[index].title;
+        document.getElementById("mp3-artist").innerText = playlistMp3[index].artist;
+    }
+}
+
+function toggleMp3() {
+    const btn = document.getElementById("btn-mp3-play");
+    if (!audioElement.src) loadMp3(0);
+
+    if (audioElement.paused) {
+        audioElement.play();
+        btn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+        audioElement.pause();
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+}
+
+function nextMp3() {
+    mp3Index = (mp3Index + 1) % playlistMp3.length;
+    loadMp3(mp3Index);
+    audioElement.play();
+    document.getElementById("btn-mp3-play").innerHTML = '<i class="fas fa-pause"></i>';
+}
+
+function prevMp3() {
+    mp3Index = (mp3Index - 1 + playlistMp3.length) % playlistMp3.length;
+    loadMp3(mp3Index);
+    audioElement.play();
+    document.getElementById("btn-mp3-play").innerHTML = '<i class="fas fa-pause"></i>';
+}
+
+// PLAYER DA RÁDIO ONLINE
+let isRadioPlaying = false;
+const radioStream = document.getElementById("radio-stream");
+// Cole aqui o link direto do seu streaming (ex: Shoutcast/Icecast .mp3 ou .aac)
+const STREAM_URL = "https://seu-servidor-de-stream.com/stream"; 
+
+function toggleRadio() {
+    const icon = document.getElementById("radio-icon");
+    const status = document.getElementById("radio-status");
+    const visualizer = document.querySelector(".radio-visualizer");
+
+    if (!isRadioPlaying) {
+        radioStream.src = STREAM_URL;
+        radioStream.play().then(() => {
+            isRadioPlaying = true;
+            icon.className = "fas fa-stop";
+            status.innerText = "Sintonizado - Transmissão Magnata";
+            visualizer.classList.add("playing");
+            
+            // Pausa música local se estiver tocando
+            if (!audioElement.paused) toggleMp3();
+        }).catch(() => {
+            status.innerText = "Erro ao conectar com a rádio (Configure a URL do Stream)";
+        });
+    } else {
+        radioStream.pause();
+        radioStream.src = "";
+        isRadioPlaying = false;
+        icon.className = "fas fa-play";
+        status.innerText = "Transmissão Pausada";
+        visualizer.classList.remove("playing");
+    }
+}
+
+// REVEAL ANIMAÇÃO
 function checkReveal() {
     const reveals = document.querySelectorAll('.reveal');
     const triggerBottom = window.innerHeight - 50;
 
     reveals.forEach(el => {
         const top = el.getBoundingClientRect().top;
-        if (top < triggerBottom) {
-            el.classList.add('active');
-        }
+        if (top < triggerBottom) el.classList.add('active');
     });
 }
 
-// INICIALIZAÇÃO
 window.addEventListener("DOMContentLoaded", () => {
     typeEffect();
     checkReveal();
+    loadMp3(0);
 });
 
 window.addEventListener("scroll", checkReveal);
