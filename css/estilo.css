@@ -416,7 +416,7 @@ header {
 
 /* Versão para celular (empilha os itens) */
 @media (max-width: 768px) {
-    .secao-conteudo {
+    .sobre-section {
         flex-direction: column; /* Joga um elemento para baixo do outro */
     }
 }
