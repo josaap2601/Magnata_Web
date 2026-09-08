@@ -389,47 +389,52 @@ header {
     color: #888;
 }
 
-/* SOBRE (ATUALIZADO) */
+/* SOBRE (ESTRUTURA VERTICAL) */
 .sobre-container { 
-    padding: 100px 5%; 
-    max-width: 1400px; 
+    padding: 100px 8%; 
+    max-width: 900px; 
     margin: 0 auto; 
 }
 
 .sobre-bloco { 
     display: flex; 
-    align-items: center; 
-    gap: 40px; 
+    flex-direction: column; 
+    gap: 30px; 
+    text-align: center;
 }
 
-.sobre-texto { 
-    flex: 1; 
+.sobre-texto-topo h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary);
 }
 
-.galeria-sobre {
-    flex: 1.2;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+.sobre-texto-topo p, .sobre-texto-rodape p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ccc;
 }
 
-.imagem-lado { 
+.imagem-vertical { 
     position: relative; 
     cursor: pointer; 
     overflow: hidden;
     border-radius: 20px;
+    width: 100%;
+    border: 1px solid var(--glass);
 }
 
-.imagem-lado img { 
+.imagem-vertical img { 
     width: 100%; 
-    height: 280px; 
+    max-height: 450px; 
     object-fit: cover; 
     border-radius: 20px;
+    display: block;
     transition: transform 0.3s ease;
 }
 
-.imagem-lado:hover img {
-    transform: scale(1.05);
+.imagem-vertical:hover img {
+    transform: scale(1.03);
 }
 
 .zoom-hint {
@@ -567,6 +572,4 @@ footer { padding: 80px 8% 40px; background: #050505; text-align: center; }
 
 @media (max-width: 768px) {
     .sidebar { width: 80%; }
-    .sobre-bloco { flex-direction: column; }
-    .galeria-sobre { width: 100%; grid-template-columns: 1fr; }
 }

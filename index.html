@@ -108,24 +108,30 @@
         </div>
     </section>
 
-    <!-- SEÇÃO SOBRE -->
+    <!-- SEÇÃO SOBRE (COM ESTRUTURA VERTICAL SOLICITADA) -->
     <section id="sobre" class="sobre-container">
         <div class="sobre-bloco reveal">
-            <div class="sobre-texto">
+            <!-- 1. TEXTO INICIAL -->
+            <div class="sobre-texto-topo">
                 <h2>Sobre a Magnata Production</h2>
-                <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto.</p>
+                <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto. Combinamos criatividade e tecnologia para elevar a presença visual do seu negócio.</p>
             </div>
-            
-            <div class="galeria-sobre">
-                <div class="imagem-lado" onclick="abrirImagem('img/proj1.jpg', 'Estúdio & Estrutura', 'Equipamentos de última geração.')">
-                    <img src="img/proj1.jpg" alt="Sobre a Magnata Production 1">
-                    <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
-                </div>
-                
-                <div class="imagem-lado" onclick="abrirImagem('img/proj2.jpg', 'Produção Audiovisual', 'Equipe em ação no set.')">
-                    <img src="img/proj2.jpg" alt="Sobre a Magnata Production 2">
-                    <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
-                </div>
+
+            <!-- 2. PRIMEIRA IMAGEM -->
+            <div class="imagem-vertical" onclick="abrirImagem('img/proj1.jpg', 'Estúdio & Estrutura', 'Equipamentos de última geração para produções de alto nível.')">
+                <img src="img/proj1.jpg" alt="Sobre a Magnata Production 1">
+                <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
+            </div>
+
+            <!-- 3. SEGUNDA IMAGEM -->
+            <div class="imagem-vertical" onclick="abrirImagem('img/proj2.jpg', 'Produção Audiovisual', 'Nossa equipe em ação desenvolvendo projetos exclusivos.')">
+                <img src="img/proj2.jpg" alt="Sobre a Magnata Production 2">
+                <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
+            </div>
+
+            <!-- 4. TEXTO FINAL -->
+            <div class="sobre-texto-rodape">
+                <p>Nosso compromisso é entregar resultados cinematográficos e estratégias visuais personalizadas para cada cliente. Do conceito inicial à pós-produção, cuidamos de cada detalhe com excelência.</p>
             </div>
         </div>
     </section>
