@@ -375,8 +375,8 @@ header {
     z-index: 2100;
 }
 
-/* sobre-section*/
 
+/* sobre-section*/
 .sobre{
     display: flex; /* Coloca os itens lado a lado */
     align-items: center; /* Alinha verticalmente ao centro */
