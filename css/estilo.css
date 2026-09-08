@@ -378,12 +378,14 @@ header {
 
 /* sobre-section*/
 .sobre{
+
+    padding: 100px 8%;
     display: flex; /* Coloca os itens lado a lado */
     align-items: center; /* Alinha verticalmente ao centro */
     gap: 40px; /* Espaço entre o texto e a imagem */
-    max-width: 100px;
+    max-width: 1100px;
     margin: 50px auto;
-    padding: 0 20px;
+    /*padding: 0 20px;*/
 }
 
 /* Caixa de texto */
@@ -409,13 +411,32 @@ header {
 }
 
 .imagem-lado img {
+
+
+
+    height: 450px;
+    position: relative;
+    border-radius: 25px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--glass);
+    transition: 0.5s;
+
+
+
     width: 100%; /* Deixa a imagem responsiva */
-    height: auto;
+    /*height: auto;
     border-radius: 8px; /* Cantos arredondados opcionais */
 }
 
+
+
+
+
+
+
 /* Versão para celular (empilha os itens) */
-@media (max-width: 768px) {
+@media (max-width: 68px) {
     .sobre-section {
         flex-direction: column; /* Joga um elemento para baixo do outro */
     }
