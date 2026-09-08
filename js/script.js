@@ -62,7 +62,7 @@ function abrirVideo(id, titulo, descricao) {
     if (modalDesc) modalDesc.innerText = descricao;
     
     if (modal) {
-        modal.style.display = "block";
+        modal.classList.add("active-modal");
         document.body.classList.add("no-scroll");
     }
 
@@ -84,22 +84,46 @@ function abrirVideo(id, titulo, descricao) {
 
 function closeModalFunc() {
     const modal = document.getElementById("projectModal");
-    if (modal) modal.style.display = "none";
+    if (modal) modal.classList.remove("active-modal");
     if (ytPlayer && typeof ytPlayer.stopVideo === 'function') {
         ytPlayer.stopVideo();
     }
     document.body.classList.remove("no-scroll");
 }
 
-// FECHAR MODAL AO CLICAR FORA DA CAIXA
-window.onclick = (e) => {
-    const modal = document.getElementById("projectModal");
-    if (e.target === modal) {
-        closeModalFunc();
+// ABRIR E FECHAR MODAL DE IMAGEM
+function abrirImagem(src, titulo, descricao) {
+    const imgModal = document.getElementById("imageModal");
+    const imgModalSrc = document.getElementById("imgModalSrc");
+    const imgModalTitle = document.getElementById("imgModalTitle");
+    const imgModalDesc = document.getElementById("imgModalDesc");
+
+    if (imgModalSrc) imgModalSrc.src = src;
+    if (imgModalTitle) imgModalTitle.innerText = titulo;
+    if (imgModalDesc) imgModalDesc.innerText = descricao;
+
+    if (imgModal) {
+        imgModal.classList.add("active-modal");
+        document.body.classList.add("no-scroll");
     }
+}
+
+function closeImageModal() {
+    const imgModal = document.getElementById("imageModal");
+    if (imgModal) imgModal.classList.remove("active-modal");
+    document.body.classList.remove("no-scroll");
+}
+
+// FECHAR MODAL AO CLICAR FORA
+window.onclick = (e) => {
+    const projectModal = document.getElementById("projectModal");
+    const imageModal = document.getElementById("imageModal");
+
+    if (e.target === projectModal) closeModalFunc();
+    if (e.target === imageModal) closeImageModal();
 };
 
-// ANIMAÇÃO REVEAL AO ROLAR A PÁGINA
+// ANIMAÇÃO REVEAL
 function checkReveal() {
     const reveals = document.querySelectorAll('.reveal');
     const triggerBottom = window.innerHeight - 50;

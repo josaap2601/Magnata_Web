@@ -34,7 +34,6 @@
     <header id="home">
         <div class="img-wrapper"><img src="img/bg.jpg" alt="Background"></div>
         <div class="banner">
-            <!-- Deixado vazio para o JS preencher via efeito de digitação -->
             <h1 id="typing-text"></h1>
             <p class="subtitle reveal">Produção Audiovisual Profissional</p>
             <div class="banner-buttons reveal">
@@ -54,58 +53,58 @@
         </div>
 
         <div class="cards-container">
-            <div class="card reveal video" onclick="abrirVideo('Q5U9aMsqBzo', 'Showreel Oficial', 'Vídeo do meu canal Magnata Production.')">
+            <div class="card reveal video" onclick="abrirVideo('Q5U9aMsqBzo', 'Showreel Visual 2026', 'Edição dinâmica, transições fluídas e color grading cinematográfico para marcas de prestígio.')">
                 <img src="https://img.youtube.com/vi/Q5U9aMsqBzo/maxresdefault.jpg" alt="Thumb">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="card-overlay"><h3>Visual</h3><p>Showreel 2026</p></div>
             </div>
 
-            <div class="card reveal video" onclick="abrirVideo('goH09yHozog', 'Showreel Oficial', 'Vídeo do meu canal Magnata Production.')">
+            <div class="card reveal video" onclick="abrirVideo('goH09yHozog', 'Showreel Audiovisual', 'Produção completa para campanhas publicitárias e videoclipes de alto impacto.')">
                 <img src="https://img.youtube.com/vi/goH09yHozog/maxresdefault.jpg" alt="Thumb">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="card-overlay"><h3>Audiovisual</h3><p>Showreel 2026</p></div>
             </div>
 
-            <div class="card reveal web">
+            <div class="card reveal web" onclick="abrirImagem('img/conhecimentos.png', 'Brand Design & Identidade Visual', 'Construção de marca moderna com paleta de cores estrategicamente elaborada e posicionamento premium.')">
                 <img src="img/conhecimentos.png" alt="Design">
                 <div class="card-overlay"><h3>Brand Design</h3><p>Identidade Visual</p></div>
             </div>
         </div>
     </main>
 
-    <!-- Seção Sobre Expandida com Múltiplos Blocos Alternados -->
+    <!-- Seção Sobre Expandida -->
     <section id="sobre" class="sobre-container">
         
-        <!-- Bloco 1: Texto na Esquerda, Imagem na Direita -->
         <div class="sobre-bloco reveal">
             <div class="sobre-texto">
                 <h2>Sobre a Magnata Production</h2>
-                <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto. Criamos soluções visuais completas para elevar o nível da sua marca, desde identidades visuais marcantes até vídeos promocionais e aplicações web modernas.</p>
+                <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto. Criamos soluções visuais completas para elevar o nível da sua marca.</p>
             </div>
-            <div class="imagem-lado">
+            <div class="imagem-lado" onclick="abrirImagem('img/proj1.jpg', 'Estúdio & Estrutura', 'Equipamentos de última geração para gravações em 4K e pós-produção avançada.')">
                 <img src="img/proj1.jpg" alt="Sobre a Magnata Production">
+                <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
             </div>
         </div>
 
-        <!-- Bloco 2: Imagem na Esquerda, Texto na Direita (Invertido) -->
         <div class="sobre-bloco reverse reveal">
             <div class="sobre-texto">
                 <h2>Produção Audiovisual de Elite</h2>
-                <p>Nossas produções em vídeo contam com edição profissional, color grading avançado e sound design imersivo. Garantimos que a mensagem da sua empresa seja transmitida com clareza e autoridade no mercado.</p>
+                <p>Nossas produções em vídeo contam com edição profissional, color grading avançado e sound design imersivo para garantir máxima autoridade no mercado.</p>
             </div>
-            <div class="imagem-lado">
+            <div class="imagem-lado" onclick="abrirImagem('img/bg.jpg', 'Cinematografia', 'Direção de cena e iluminação de estúdio para gravações de alto padrão.')">
                 <img src="img/bg.jpg" alt="Produção Audiovisual">
+                <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
             </div>
         </div>
 
-        <!-- Bloco 3: Texto na Esquerda, Imagem na Direita -->
         <div class="sobre-bloco reveal">
             <div class="sobre-texto">
                 <h2>Design & Identidade Visual</h2>
-                <p>Desenvolvemos conceitos gráficos sólidos que destacam a essência do seu negócio. Projetamos logotipos, mídias sociais e materiais gráficos completos com um padrão estético de alto nível.</p>
+                <p>Desenvolvemos conceitos gráficos sólidos que destacam a essência do seu negócio. Projetamos logotipos e materiais gráficos com padrão estético internacional.</p>
             </div>
-            <div class="imagem-lado">
+            <div class="imagem-lado" onclick="abrirImagem('img/conhecimentos.png', 'Design Estratégico', 'Projetos visuais focados em conversão e retenção de público.')">
                 <img src="img/conhecimentos.png" alt="Design & Identidade Visual">
+                <div class="zoom-hint"><i class="fas fa-search-plus"></i> Ampliar</div>
             </div>
         </div>
 
@@ -131,16 +130,32 @@
         <p>&copy; 2026 Magnata Production. Todos os direitos reservados.</p>
     </footer>
 
+    <!-- MODAL DE VÍDEO -->
     <div id="projectModal" class="modal">
         <span class="close-modal" onclick="closeModalFunc()">&times;</span>
         <div class="modal-box">
             <div id="videoArea" class="video-container">
                 <div id="player"></div>
             </div>
-            <div style="padding: 40px; text-align: center;">
+            <div class="modal-info">
                 <h2 id="modal-title"></h2>
-                <p id="modal-desc" style="margin: 20px 0; color: #ccc;"></p>
-                <button class="btn-primary" onclick="closeModalFunc()">Fechar</button>
+                <p id="modal-desc"></p>
+                <button class="btn-primary" onclick="closeModalFunc()">Fechar Player</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE IMAGEM (LIGHTBOX) -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <div class="modal-box img-modal-box">
+            <div class="img-preview-container">
+                <img id="imgModalSrc" src="" alt="Ampliação">
+            </div>
+            <div class="modal-info">
+                <h2 id="imgModalTitle"></h2>
+                <p id="imgModalDesc"></p>
+                <button class="btn-primary" onclick="closeImageModal()">Fechar Visualização</button>
             </div>
         </div>
     </div>
