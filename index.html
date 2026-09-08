@@ -27,14 +27,14 @@
     <aside class="sidebar" id="sidebar">
         <span class="menu-link" onclick="handleNav('home')">Início</span>
         <span class="menu-link" onclick="handleNav('projetos')">Projetos</span>
-        <span class="menu-link" onclick="handleNav('sobre')">Em breve Sobre</span>
+        <span class="menu-link" onclick="handleNav('sobre')">Sobre</span>
         <span class="menu-link" onclick="handleNav('contato')">Orçamento</span>
     </aside>
 
     <header id="home">
         <div class="img-wrapper"><img src="img/bg.jpg" alt="Background"></div>
         <div class="banner">
-            <h1 id="typing-text"></h1>
+            <h1 id="typing-text">Magnata Production</h1>
             <p class="subtitle reveal">Produção Audiovisual Profissional</p>
             <div class="banner-buttons reveal">
                 <button class="btn-primary" onclick="scrollToId('projetos')">Ver Projetos</button>
@@ -54,9 +54,9 @@
 
         <div class="cards-container">
             <div class="card reveal video" onclick="abrirVideo('Q5U9aMsqBzo', 'Showreel Oficial', 'Vídeo do meu canal Magnata Production.')">
-                <img src="https://youtu.be/Q5U9aMsqBzo/maxresdefault.jpg" alt="Thumb">
+                <img src="https://img.youtube.com/vi/Q5U9aMsqBzo/maxresdefault.jpg" alt="Thumb">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
-                <div class="card-overlay"><h3>visual</h3><p>Showreel 2026</p></div>
+                <div class="card-overlay"><h3>Visual</h3><p>Showreel 2026</p></div>
             </div>
 
             <div class="card reveal video" onclick="abrirVideo('goH09yHozog', 'Showreel Oficial', 'Vídeo do meu canal Magnata Production.')">
@@ -70,32 +70,19 @@
                 <div class="card-overlay"><h3>Brand Design</h3><p>Identidade Visual</p></div>
             </div>
         </div>
-
-
-
-
-        
-
-        
-        
-        <!-- Seção de Texto e Imagem -->
-        <section id="sobre" class="sobre-section"></section>
-            
-            <h2>Título da Seção</h2>
-            <p>Este é um parágrafo de exemplo que fica ao lado da imagem. Você pode colocar aqui a apresentação do seu produto, serviço ou empresa. O layout se adapta perfeitamente a computadores e celulares.</p>
-            
-            <div class="imagem-lado">
-                <img src="https://img/proj1.jpg" alt="Exemplo de imagem ilustrativa">
-            </div>
-        </section>
-
-
-
-
-
-
-
     </main>
+
+    <!-- Seção Sobre (Corrigida e Alinhada) -->
+    <section id="sobre" class="sobre reveal">
+        <div class="sobre-texto">
+            <h2>Sobre a Magnata Production</h2>
+            <p>Somos uma produtora especializada em design de alta performance e produções audiovisuais de impacto. Criamos soluções visuais completas para elevar o nível da sua marca, desde identidades visuais marcantes até vídeos promocionais e aplicações web modernas.</p>
+        </div>
+        
+        <div class="imagem-lado">
+            <img src="img/proj1.jpg" alt="Sobre a Magnata Production">
+        </div>
+    </section>
 
     <section id="contato" style="padding: 100px 8%; background: #000;">
         <div class="contact-wrapper reveal" style="max-width: 600px; margin: 0 auto; text-align: center;">
@@ -134,7 +121,6 @@
     <a href="https://wa.me/5547999863650" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
     <script src="https://www.youtube.com/iframe_api"></script>
-        
     <script src="js/script.js"></script>
 </body>
 </html>
