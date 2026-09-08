@@ -150,14 +150,42 @@ function closeImageModal() {
     document.body.classList.remove("no-scroll");
 }
 
-// PLAYER DE MÚSICA LOCAL MP3 (pasta /musicas)
-const playlistMp3 = [
-    { title: "Faixa 01", artist: "Magnata Sound", src: "musicas/musica1.mp3" },
-    { title: "Faixa 02", artist: "Magnata Sound", src: "musicas/musica2.mp3" }
-];
+// =========================================================
+// PLAYER DE MÚSICA - BUSCA AUTOMÁTICA DO GITHUB
+// =========================================================
+const GITHUB_USER = 'josaap2601';
+const GITHUB_REPO = 'Magnata_Web';
+const GITHUB_FOLDER = 'musicas';
 
+let playlistMp3 = [];
 let mp3Index = 0;
 const audioElement = document.getElementById("audio-element");
+
+async function carregarMusicasDoGithub() {
+    const url = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}`;
+    
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Erro na conexão");
+
+        const files = await response.json();
+        const mp3Files = files.filter(file => file.name.toLowerCase().endsWith('.mp3'));
+
+        if (mp3Files.length > 0) {
+            playlistMp3 = mp3Files.map(file => ({
+                title: file.name.replace(/\.mp3$/i, ''),
+                artist: "Magnata Sound",
+                src: file.download_url
+            }));
+            loadMp3(0);
+        } else {
+            document.getElementById("mp3-title").innerText = "Nenhuma música na pasta";
+        }
+    } catch (error) {
+        console.error("Erro ao carregar músicas:", error);
+        document.getElementById("mp3-title").innerText = "Aguardando faixas...";
+    }
+}
 
 function loadMp3(index) {
     if (playlistMp3[index]) {
@@ -169,7 +197,7 @@ function loadMp3(index) {
 
 function toggleMp3() {
     const btn = document.getElementById("btn-mp3-play");
-    if (!audioElement.src) loadMp3(0);
+    if (!audioElement.src && playlistMp3.length > 0) loadMp3(0);
 
     if (audioElement.paused) {
         audioElement.play();
@@ -181,6 +209,7 @@ function toggleMp3() {
 }
 
 function nextMp3() {
+    if (playlistMp3.length === 0) return;
     mp3Index = (mp3Index + 1) % playlistMp3.length;
     loadMp3(mp3Index);
     audioElement.play();
@@ -188,6 +217,7 @@ function nextMp3() {
 }
 
 function prevMp3() {
+    if (playlistMp3.length === 0) return;
     mp3Index = (mp3Index - 1 + playlistMp3.length) % playlistMp3.length;
     loadMp3(mp3Index);
     audioElement.play();
@@ -197,7 +227,6 @@ function prevMp3() {
 // PLAYER DA RÁDIO ONLINE
 let isRadioPlaying = false;
 const radioStream = document.getElementById("radio-stream");
-// Cole aqui o link direto do seu streaming (ex: Shoutcast/Icecast .mp3 ou .aac)
 const STREAM_URL = "https://seu-servidor-de-stream.com/stream"; 
 
 function toggleRadio() {
@@ -213,10 +242,9 @@ function toggleRadio() {
             status.innerText = "Sintonizado - Transmissão Magnata";
             visualizer.classList.add("playing");
             
-            // Pausa música local se estiver tocando
             if (!audioElement.paused) toggleMp3();
         }).catch(() => {
-            status.innerText = "Erro ao conectar com a rádio (Configure a URL do Stream)";
+            status.innerText = "Erro ao conectar com a rádio";
         });
     } else {
         radioStream.pause();
@@ -242,7 +270,7 @@ function checkReveal() {
 window.addEventListener("DOMContentLoaded", () => {
     typeEffect();
     checkReveal();
-    loadMp3(0);
+    carregarMusicasDoGithub();
 });
 
 window.addEventListener("scroll", checkReveal);
