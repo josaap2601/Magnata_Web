@@ -251,6 +251,14 @@ function prevMp3() {
 const RADIO_API = "https://nossa-radio.base44.app/api/apps/6a527b7903ea3715e14184a8/entities/Musicas?q=" +
     encodeURIComponent(JSON.stringify({ radio_id: "6ad5adb47b11d30c91160ee1" }));
 
+const RADIO_FALLBACK = [
+    {
+        src: "https://media.base44.com/files/public/6a527b7903ea3715e14184a8/2a46df076_Akon_-_Right_Now_Na_Na_Na_Official_Video_OPUS_256kbps.opus",
+        titulo: "Right Now (Na Na Na)",
+        artista: "Akon"
+    }
+];
+
 let isRadioPlaying = false;
 let radioFila = [];
 let radioIndex = 0;
@@ -283,8 +291,9 @@ async function carregarRadio() {
         if (!radioFila.length) throw new Error("vazio");
         atualizarProgramacao();
     } catch (e) {
-        console.error("Erro ao carregar rádio:", e);
-        if (lista) lista.innerHTML = "<li>Programação indisponível no momento</li>";
+        console.error("Erro ao carregar rádio, usando lista local:", e);
+        radioFila = RADIO_FALLBACK.slice();
+        atualizarProgramacao();
     }
 }
 
