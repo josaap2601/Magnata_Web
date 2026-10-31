@@ -213,7 +213,6 @@ function toggleMp3() {
     }
 
     if (audioElement.paused) {
-        if (isRadioPlaying) toggleRadio(); // Se a rádio estiver tocando, pausa ela
         audioElement.play().then(() => {
             if (btn) btn.innerHTML = '<i class="fas fa-pause"></i>';
         }).catch(e => console.error("Erro ao dar play:", e));
@@ -242,42 +241,6 @@ function prevMp3() {
         audioElement.play();
         const btn = document.getElementById("btn-mp3-play");
         if (btn) btn.innerHTML = '<i class="fas fa-pause"></i>';
-    }
-}
-
-// =========================================================
-// PLAYER DA RÁDIO WEB
-// =========================================================
-let isRadioPlaying = false;
-const STREAM_URL = "https://seu-servidor-de-stream.com/stream"; 
-
-function toggleRadio() {
-    const radioStream = document.getElementById("radio-stream");
-    const icon = document.getElementById("radio-icon");
-    const status = document.getElementById("radio-status");
-    const visualizer = document.querySelector(".radio-visualizer");
-
-    if (!radioStream) return;
-
-    if (!isRadioPlaying) {
-        radioStream.src = STREAM_URL;
-        radioStream.play().then(() => {
-            isRadioPlaying = true;
-            if (icon) icon.className = "fas fa-stop";
-            if (status) status.innerText = "Sintonizado - Transmissão Magnata";
-            if (visualizer) visualizer.classList.add("playing");
-            
-            if (audioElement && !audioElement.paused) toggleMp3();
-        }).catch(() => {
-            if (status) status.innerText = "Erro ao conectar à rádio";
-        });
-    } else {
-        radioStream.pause();
-        radioStream.src = "";
-        isRadioPlaying = false;
-        if (icon) icon.className = "fas fa-play";
-        if (status) status.innerText = "Transmissão Pausada";
-        if (visualizer) visualizer.classList.remove("playing");
     }
 }
 
