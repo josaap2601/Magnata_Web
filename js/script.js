@@ -213,6 +213,7 @@ function toggleMp3() {
     }
 
     if (audioElement.paused) {
+        if (isRadioPlaying) toggleRadio();
         audioElement.play().then(() => {
             if (btn) btn.innerHTML = '<i class="fas fa-pause"></i>';
         }).catch(e => console.error("Erro ao dar play:", e));
@@ -244,6 +245,109 @@ function prevMp3() {
     }
 }
 
+// =========================================================
+// PLAYER DA RÁDIO WEB (MANIA CIDADE)
+// =========================================================
+// Músicas da rádio: arquivos .mp3 da pasta "musicas" do repositório
+const RADIO_PASTA = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}`;
+
+let isRadioPlaying = false;
+let radioFila = [];
+let radioIndex = 0;
+
+async function carregarRadio() {
+    const lista = document.getElementById("radio-schedule-list");
+    try {
+        const res = await fetch(RADIO_PASTA);
+        if (!res.ok) throw new Error(res.status);
+        const arquivos = await res.json();
+        radioFila = arquivos
+            .filter(f => f.name.toLowerCase().endsWith(".mp3"))
+            .map(f => {
+                const nome = f.name.replace(/\.mp3$/i, "");
+                const partes = nome.split(" - ");
+                return {
+                    src: f.download_url,
+                    titulo: partes.length > 1 ? partes.slice(1).join(" - ") : nome,
+                    artista: partes.length > 1 ? partes[0] : "Mania Cidade"
+                };
+            });
+        for (let i = radioFila.length - 1; i > 0; i--) {
+            const r = Math.floor(Math.random() * (i + 1));
+            [radioFila[i], radioFila[r]] = [radioFila[r], radioFila[i]];
+        }
+        if (!radioFila.length) throw new Error("vazio");
+        atualizarProgramacao();
+    } catch (e) {
+        console.error("Erro ao carregar rádio:", e);
+        if (lista) lista.innerHTML = "<li>Nenhuma música encontrada na pasta musicas</li>";
+    }
+}
+
+function atualizarProgramacao() {
+    const lista = document.getElementById("radio-schedule-list");
+    const status = document.getElementById("radio-status");
+    const artista = document.getElementById("radio-artist");
+    const atual = radioFila[radioIndex];
+    if (status && atual && isRadioPlaying) status.innerText = atual.titulo;
+    if (artista && atual && isRadioPlaying) artista.innerText = atual.artista;
+    if (!lista) return;
+    lista.innerHTML = "";
+    for (let i = 0; i < Math.min(radioFila.length, 6); i++) {
+        const m = radioFila[(radioIndex + i) % radioFila.length];
+        const li = document.createElement("li");
+        li.textContent = (i === 0 ? "▶ " : "") + m.titulo + " - " + m.artista;
+        if (i === 0) li.className = "atual";
+        lista.appendChild(li);
+    }
+}
+
+function tocarFaixaRadio() {
+    const audio = document.getElementById("radio-stream");
+    if (!audio || !radioFila.length) return Promise.reject();
+    audio.src = radioFila[radioIndex].src;
+    atualizarProgramacao();
+    return audio.play();
+}
+
+function proximaFaixaRadio() {
+    radioIndex = (radioIndex + 1) % radioFila.length;
+    tocarFaixaRadio().catch(proximaFaixaRadio);
+}
+
+async function toggleRadio() {
+    const audio = document.getElementById("radio-stream");
+    const icon = document.getElementById("radio-icon");
+    const status = document.getElementById("radio-status");
+    const artista = document.getElementById("radio-artist");
+    const visualizer = document.querySelector(".radio-visualizer");
+    if (!audio) return;
+
+    if (isRadioPlaying) {
+        audio.pause();
+        isRadioPlaying = false;
+        if (icon) icon.className = "fas fa-play";
+        if (status) status.innerText = "Mania Cidade";
+        if (artista) artista.innerText = "Transmissão pausada";
+        if (visualizer) visualizer.classList.remove("playing");
+        return;
+    }
+
+    if (!radioFila.length) await carregarRadio();
+    if (audioElement && !audioElement.paused) toggleMp3();
+
+    audio.onended = proximaFaixaRadio;
+    isRadioPlaying = true;
+    tocarFaixaRadio().then(() => {
+        if (icon) icon.className = "fas fa-pause";
+        if (visualizer) visualizer.classList.add("playing");
+        atualizarProgramacao();
+    }).catch(() => {
+        isRadioPlaying = false;
+        if (status) status.innerText = "Erro ao conectar à rádio";
+    });
+}
+
 // REVEAL ANIMAÇÃO
 function checkReveal() {
     const reveals = document.querySelectorAll('.reveal');
@@ -259,6 +363,7 @@ window.addEventListener("DOMContentLoaded", () => {
     typeEffect();
     checkReveal();
     carregarMusicasDoGithub();
+    carregarRadio();
 });
 
 window.addEventListener("scroll", checkReveal);

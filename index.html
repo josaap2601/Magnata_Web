@@ -82,7 +82,7 @@
             <div class="radio-header">
                 <span class="badge-live"><i class="fas fa-circle"></i> NO AR</span>
                 <h2>Rádio Mania Cidade</h2>
-                <p>Acompanhe a programação da Mania Cidade pelo player oficial.</p>
+                <p>Música sem parar, com a programação sempre à vista.</p>
             </div>
 
             <div class="radio-player-box">
@@ -95,16 +95,22 @@
                 </div>
                 
                 <div class="radio-controls">
+                    <button id="btn-radio-play" class="btn-primary-circle" onclick="toggleRadio()" aria-label="Tocar rádio">
+                        <i class="fas fa-play" id="radio-icon"></i>
+                    </button>
                     <div class="radio-info">
-                        <span>Mania Cidade</span>
-                        <small>Player oficial da rádio</small>
+                        <small>NO AR</small>
+                        <span id="radio-status">Mania Cidade</span>
+                        <small id="radio-artist">Clique no play para ouvir</small>
                     </div>
-                    <a class="btn-primary" href="https://nossa-radio.base44.app/radio/mania-cidade-uqs8ba3" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-external-link-alt"></i> Abrir em nova aba
-                    </a>
                 </div>
 
-                <iframe class="radio-embed" src="https://nossa-radio.base44.app/radio/mania-cidade-uqs8ba3" title="Rádio Mania Cidade" allow="autoplay; encrypted-media" loading="lazy"></iframe>
+                <div class="radio-schedule">
+                    <h4>Programação</h4>
+                    <ul id="radio-schedule-list"><li>Carregando...</li></ul>
+                </div>
+
+                <audio id="radio-stream" preload="none"></audio>
             </div>
         </div>
     </section>
