@@ -248,42 +248,30 @@ function prevMp3() {
 // =========================================================
 // PLAYER DA RÁDIO WEB (MANIA CIDADE)
 // =========================================================
-const RADIO_API = "https://nossa-radio.base44.app/api/apps/6a527b7903ea3715e14184a8/entities/Musicas?q=" +
-    encodeURIComponent(JSON.stringify({ radio_id: "6ad5adb47b11d30c91160ee1" }));
-
-const RADIO_FALLBACK = [
-    {
-        src: "https://media.base44.com/files/public/6a527b7903ea3715e14184a8/2a46df076_Akon_-_Right_Now_Na_Na_Na_Official_Video_OPUS_256kbps.opus",
-        titulo: "Right Now (Na Na Na)",
-        artista: "Akon"
-    }
-];
+// Músicas da rádio: arquivos .mp3 da pasta "musicas" do repositório
+const RADIO_PASTA = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}`;
 
 let isRadioPlaying = false;
 let radioFila = [];
 let radioIndex = 0;
 
-function pegarCampo(obj, chaves) {
-    for (const k of chaves) if (obj && obj[k]) return obj[k];
-    return "";
-}
-
-function normalizarMusica(m) {
-    return {
-        src: pegarCampo(m, ["file_url", "audio_url", "url", "arquivo", "src", "link"]),
-        titulo: pegarCampo(m, ["titulo", "title", "nome", "name", "musica"]) || "Música",
-        artista: pegarCampo(m, ["artista", "artist", "cantor", "autor"]) || "Mania Cidade"
-    };
-}
-
 async function carregarRadio() {
     const lista = document.getElementById("radio-schedule-list");
     try {
-        const res = await fetch(RADIO_API);
+        const res = await fetch(RADIO_PASTA);
         if (!res.ok) throw new Error(res.status);
-        const dados = await res.json();
-        const itens = Array.isArray(dados) ? dados : (dados.items || dados.data || []);
-        radioFila = itens.map(normalizarMusica).filter(m => m.src);
+        const arquivos = await res.json();
+        radioFila = arquivos
+            .filter(f => f.name.toLowerCase().endsWith(".mp3"))
+            .map(f => {
+                const nome = f.name.replace(/\.mp3$/i, "");
+                const partes = nome.split(" - ");
+                return {
+                    src: f.download_url,
+                    titulo: partes.length > 1 ? partes.slice(1).join(" - ") : nome,
+                    artista: partes.length > 1 ? partes[0] : "Mania Cidade"
+                };
+            });
         for (let i = radioFila.length - 1; i > 0; i--) {
             const r = Math.floor(Math.random() * (i + 1));
             [radioFila[i], radioFila[r]] = [radioFila[r], radioFila[i]];
@@ -291,9 +279,8 @@ async function carregarRadio() {
         if (!radioFila.length) throw new Error("vazio");
         atualizarProgramacao();
     } catch (e) {
-        console.error("Erro ao carregar rádio, usando lista local:", e);
-        radioFila = RADIO_FALLBACK.slice();
-        atualizarProgramacao();
+        console.error("Erro ao carregar rádio:", e);
+        if (lista) lista.innerHTML = "<li>Nenhuma música encontrada na pasta musicas</li>";
     }
 }
 
